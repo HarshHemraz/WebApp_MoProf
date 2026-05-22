@@ -1,0 +1,104 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|c:\\users\\space4\\source\\repos\\moprof_assignment_sol\\moprof_assignment\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|solutionrelative:moprof_assignment\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moprof_assignment\\student.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|solutionrelative:moprof_assignment\\student.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moprof_assignment\\student.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|solutionrelative:moprof_assignment\\student.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moprof_assignment\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|solutionrelative:moprof_assignment\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moprof_assignment\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{A828544A-7DFA-4034-B5F4-DCCCDD3CFE0C}|moProf_Assignment\\moProf_Assignment.csproj|solutionrelative:moprof_assignment\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Site.css",
+              "DocumentMoniker": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\Content\\Site.css",
+              "RelativeDocumentMoniker": "moProf_Assignment\\Content\\Site.css",
+              "ToolTip": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\Content\\Site.css",
+              "RelativeToolTip": "moProf_Assignment\\Content\\Site.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-05-21T06:27:08.727Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "student.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\student.aspx.cs",
+              "RelativeDocumentMoniker": "moProf_Assignment\\student.aspx.cs",
+              "ToolTip": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\student.aspx.cs",
+              "RelativeToolTip": "moProf_Assignment\\student.aspx.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAIAwwBAAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T16:11:49.003Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "student.aspx",
+              "DocumentMoniker": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\student.aspx",
+              "RelativeDocumentMoniker": "moProf_Assignment\\student.aspx",
+              "ToolTip": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\student.aspx",
+              "RelativeToolTip": "moProf_Assignment\\student.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-05-21T09:38:59.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "index.aspx",
+              "DocumentMoniker": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\index.aspx",
+              "RelativeDocumentMoniker": "moProf_Assignment\\index.aspx",
+              "ToolTip": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\index.aspx",
+              "RelativeToolTip": "moProf_Assignment\\index.aspx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-05-21T07:47:11.401Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Site.Master",
+              "DocumentMoniker": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\Site.Master",
+              "RelativeDocumentMoniker": "moProf_Assignment\\Site.Master",
+              "ToolTip": "C:\\Users\\SPACE4\\source\\repos\\moProf_Assignment_SOL\\moProf_Assignment\\Site.Master",
+              "RelativeToolTip": "moProf_Assignment\\Site.Master",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-05-21T05:42:54.252Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

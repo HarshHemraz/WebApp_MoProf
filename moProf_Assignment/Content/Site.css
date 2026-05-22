@@ -1,0 +1,152 @@
+﻿/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    margin-top: -4rem;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+.form-check {
+    padding-left:0;
+}
+.text-center {
+    margin-bottom: 0.8rem;
+}
+.login .container {
+    padding-bottom: 6rem;
+}
+.alertbox {
+    left:0.5rem;
+}
+.passemailtxt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+    .passemailtxt .mb-3 {
+        width: 120%;
+        max-width: 350px;
+    }
+
+    .passemailtxt .form-control {
+        width: 100% !important;
+        margin: 0 auto;
+    }
+
+.carousel-item {
+    height: 16rem; /* Adjust this value as needed */
+    object-fit: cover; /* Ensures the image covers the entire area without distortion */
+}
+.container .info {
+    padding-bottom: 10rem;
+}
+.carousel-inner {
+    padding-bottom: 10rem;
+    position: relative;
+    width: 100%;
+  
+}
+
+    .carousel-item img {
+        height: 100%;
+        object-fit: cover; /* Prevents image distortion */
+    }
+
+.rowInfo {
+    padding: 0 3.5rem;
+}
+/*loginPage*/
+.login {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.form-control {
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+.btn-custom {
+    background: #007bff;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+    .btn-custom:hover {
+        background: #0056b3;
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(2px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    .container .info {
+        padding-bottom: 0rem;
+    }
+    .login .container {
+    padding-bottom: 0rem;
+}
+    .carousel-title {
+        padding-top:0rem !important;
+    }
+    .rowInfo {
+    padding: 0 0 ;
+    }
+    .login {
+        padding-bottom:10rem;
+    }
+    .carousel {
+        padding-top:2rem;
+    }
+    .body-content {
+        margin-top: 15px;
+        
+    }
+}
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+footer {
+    width:100%;
+    margin:0;
+    padding:3rem;
+
+}
+.para {
+    font-size:1rem;
+
+}
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .body-content {
+        padding: 0;
+    }
+}

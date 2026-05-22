@@ -1,0 +1,156 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="moProf_Assignment.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <link href="Content/Site.css" rel="stylesheet" />
+
+</head>
+
+<body class="d-flex flex-column min-vh-100 animate-fade-in" style="animation: fadeIn 1s forwards;" runat="server">
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        
+        <!DOCTYPE html>
+  <!-- ======================= NAVIGATION BAR (RESPONSIVE) ======================= -->
+  <!-- Using Bootstrap 5 navbar component with expand breakpoint 'lg' (desktop expands, mobile collapses) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <!-- Brand / Logo -->
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="bi bi-grid-3x3-gap-fill"></i> MoProf
+      </a>
+      <!-- Toggler button for mobile view (hamburger) — fully responsive -->
+           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Collapsible navbar content: links, dropdown, search, etc. -->
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.aspx">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Rules & Regulations</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Portal
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/student.aspx">Student Login</a></li>
+              <li><a class="dropdown-item" href="/tutorlogin">Tutor Login</a></li>
+              <li><a class="dropdown-item" href="/admi">Admin Login</a></li>
+
+            </ul>
+          </li>
+         
+        </ul>
+        <!-- Responsive right-aligned search form + button, hidden on extra small if needed but stacks gracefully -->
+
+        <section class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </section>
+      </div>
+    </div>
+  </nav>
+
+
+
+        <div>
+            <asp:ContentPlaceHolder ID="MainContent1" runat="server">
+            </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID= "MainContent2" runat="server"></asp:ContentPlaceHolder>
+            
+
+            
+    </div>
+  
+
+
+        
+
+               <footer class="bg-dark text-white pt-4 pb-3 mt-auto">
+    
+<div class="rowInfo row gy-3" >
+  <!-- Footer column 1: brand & description -->
+  <div class="col-md-3 col-12">
+    <h5 class=" fw-semibold">MoProf</h5>
+    <p class="small text-white-50">Connecting Mauritian students with qualified private tutors since 2025.</p>
+  </div>
+  <!-- Footer column 2: quick links -->
+  <div class="col-md-4 col-12">
+    <h5 class="text-uppercase fw-semibold">Quick links</h5>
+    <ul class="list-unstyled">
+      <li><a href="#" class="text-white-50 text-decoration-none">Home</a></li>
+      <li><a href="#" class="text-white-50 text-decoration-none">Features</a></li>
+      <li><a href="#" class="text-white-50 text-decoration-none">Pricing</a></li>
+      <li><a href="#" class="text-white-50 text-decoration-none">FAQs</a></li>
+    </ul>
+  </div>
+  <!-- Footer column 3: contact / social mockup -->
+  <div class="col-md-4 col-12">
+    <h5 class="text-uppercase fw-semibold">Stay connected</h5>
+    <p class="small text-white-50 mb-2">Follow us for updates and responsive design tips.</p>
+    <div>
+      <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle px-2" style="width: 32px; display: inline-block; text-align: center;">📘</a>
+      <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle px-2" style="width: 32px; display: inline-block; text-align: center;">🐦</a>
+      <a href="#" class="btn btn-outline-light btn-sm rounded-circle px-2" style="width: 32px; display: inline-block; text-align: center;">📷</a>
+    </div>
+  </div>
+</div>
+<hr class="my-3 bg-secondary">
+<div class="row">
+  <div class="col text-center small text-white-50">
+    &copy; 2025 BrandFlow — Bootstrap 5 sticky footer & navbar. All rights reserved.
+  </div>
+</div>
+                   </footer>
+    </form>
+
+
+
+    <!-- Bootstrap Bundle with Popper (only ONE reference) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+      
+
+
+</body>
+</html>
