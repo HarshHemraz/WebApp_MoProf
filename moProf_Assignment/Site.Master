@@ -1,5 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="moProf_Assignment.SiteMaster" %>
 
+<%@ Register Src="~/usercontrol/backbutton.ascx" TagPrefix="uc1" TagName="backbutton" %>
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -11,7 +14,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-
+    
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
@@ -20,6 +23,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100 animate-fade-in" style="animation: fadeIn 1s forwards;" runat="server">
+
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -37,17 +41,17 @@
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
+                
             </Scripts>
         </asp:ScriptManager>
 
-        
-        <!DOCTYPE html>
+       
   <!-- ======================= NAVIGATION BAR (RESPONSIVE) ======================= -->
   <!-- Using Bootstrap 5 navbar component with expand breakpoint 'lg' (desktop expands, mobile collapses) -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container">
       <!-- Brand / Logo -->
-      <a class="navbar-brand fw-bold" href="#">
+      <a class="navbar-brand fw-bold" href="/index.aspx">
         <i class="bi bi-grid-3x3-gap-fill"></i> MoProf
       </a>
       <!-- Toggler button for mobile view (hamburger) — fully responsive -->
@@ -59,7 +63,7 @@
       <div class="collapse navbar-collapse" id="mainNavbar">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.aspx">Home</a>
+            <a class="nav-link active" aria-current="page" href="/index.aspx">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Features</a>
@@ -67,37 +71,40 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Rules & Regulations</a>
           </li>
+
           <li class="nav-item dropdown">
+
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Portal
             </a>
+
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/student.aspx">Student Login</a></li>
-              <li><a class="dropdown-item" href="/tutorlogin">Tutor Login</a></li>
-              <li><a class="dropdown-item" href="/admi">Admin Login</a></li>
+              <li><a class="dropdown-item" href="/studentContent/studentlogin.aspx">Student Login</a></li>
+              <li><a class="dropdown-item" href="/tutorContent/tutorlogin.aspx">Tutor Login</a></li>
+              
 
             </ul>
           </li>
-         
         </ul>
         <!-- Responsive right-aligned search form + button, hidden on extra small if needed but stacks gracefully -->
 
         <section class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          
+            
           <button class="btn btn-outline-light" type="submit">Search</button>
         </section>
       </div>
     </div>
   </nav>
 
-
+        
 
         <div>
             <asp:ContentPlaceHolder ID="MainContent1" runat="server">
             </asp:ContentPlaceHolder>
             <asp:ContentPlaceHolder ID= "MainContent2" runat="server"></asp:ContentPlaceHolder>
             
-
             
     </div>
   
@@ -105,8 +112,7 @@
 
         
 
-               <footer class="bg-dark text-white pt-4 pb-3 mt-auto">
-    
+<footer id="footer-main" class="bg-dark text-white pt-5">   
 <div class="rowInfo row gy-3" >
   <!-- Footer column 1: brand & description -->
   <div class="col-md-3 col-12">
@@ -150,7 +156,6 @@
 
     
       
-
-
+    <script src="Scripts/main.js"></script>
 </body>
 </html>

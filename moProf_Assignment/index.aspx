@@ -3,7 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent1" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent2" runat="server">
+
     <main class="flex-grow-1">
+
+
         <div class="container ">
 
 
@@ -19,7 +22,7 @@
                         <p class="para">MoProf connects students across Mauritius with qualified private tutors - eliminating distance, time, and cost barriers. Browse subjects, check tutor qualifications, and reserve your seat today.</p>
 
                     <p>Sign up now and start your learning journey today!</p>
-                    <button class="btn btn-primary btn-lg mt-2" type="button">Sign Up Now</button>
+                    <a class="btn btn-primary btn-lg mt-2" href="registerpage.aspx">Sign Up Now</a>
                 </div>
 
 
