@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Categories>
+	<Category>
+		<Id>1</Id>
+		<Name>Mathematics (Algebra, Calculus, Geometry)</Name>
+	</Category>
+	<Category>
+		<Id>2</Id>
+		<Name>Sciences (Physics, Chemistry, Biology)</Name>
+	</Category>
+	<Category>
+		<Id>3</Id>
+		<Name>Languages &amp; Literature (English, French, Spanish)</Name>
+	</Category>
+	<Category>
+		<Id>4</Id>
+			<Name>Humanities (History, Geography, Sociology)</Name>
+		</Category>
+	<Category>
+		<Id>5</Id>
+		<Name>Business Studies (Accounting, Economics)</Name>
+	</Category>
+	<Category>
+		<Id>6</Id>
+		<Name>Exam Preparation (SAT, IELTS, GCSE/A-Levels)</Name>
+	</Category>
+	<Category>
+		<Id>7</Id>
+		<Name>Computer Literacy &amp; Coding for Kids</Name>
+	</Category>
+	<Category>
+		<Id>8</Id>
+		<Name>Music &amp; Creative Arts (Piano, Guitar, Painting)</Name>
+	</Category>
+	<Category>
+		<Id>9</Id>
+		<Name>Special Education Needs (SEN) Support</Name>
+	</Category>
+</Categories>

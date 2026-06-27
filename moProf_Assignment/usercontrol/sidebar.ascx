@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="sidebar.ascx.cs" Inherits="moProf_Assignment.usercontrol.sidebar" %>
-    <aside id="sidebar" class="sidebar" style="width: 15%; background-color: rgb(23, 23, 23); height: 100vh;">
+    <aside id="sidebar" class="sidebar" style=" background-color: rgb(23, 23, 23); height: 120vh">
         
       
         
@@ -25,9 +25,7 @@
            ⦾ Edit Account
             </asp:LinkButton>
             
-                         <asp:LinkButton ID="logout" runat="server" CssClass="logout-btn links-side" CausesValidation="false">
- ⍈ Logout
- </asp:LinkButton>
+
         </ul>
 
     </aside>

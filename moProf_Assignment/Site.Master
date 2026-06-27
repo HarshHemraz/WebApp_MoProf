@@ -93,12 +93,13 @@
           
             
           <button class="btn btn-outline-light" type="submit">Search</button>
+            <br />
+            <button class="btn g-1 btn-outline-light" type="submit">⍈ Logout</button>
+                                     
         </section>
       </div>
     </div>
   </nav>
-
-        
 
         <div>
             <asp:ContentPlaceHolder ID="MainContent1" runat="server">
