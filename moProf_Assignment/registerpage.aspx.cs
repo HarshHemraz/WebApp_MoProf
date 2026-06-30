@@ -38,8 +38,6 @@ namespace moProf_Assignment
     }
         protected void registerBtn_Click(object sender, EventArgs e)
         {
-            
-
             String txtfname = fname.Text.Trim();
             String txtlname = lname.Text.Trim();
             String txtemail = emailtxt.Text.Trim();
@@ -47,63 +45,69 @@ namespace moProf_Assignment
             String role = RegisterOption.SelectedValue;
             bool rememberme = checkbxRemeberMe.Checked;
 
-            string query = "INSERT INTO tblusers (firstname, lastname, email, password, role, \"rememberSession\") VALUES (@Fname,@Lname, @email, @pass, @role, @remberMe);";
-            
-
+            // Using tbusers table with correct column names
+            string userQuery = "INSERT INTO tblusers (firstName, lastName, email, password, role, \"rememberSession\") VALUES (@Fname, @Lname, @email, @pass, @role, @remberMe) RETURNING id;";
 
             using (var con = new NpgsqlConnection(conString))
             {
-                using (var cmd = new NpgsqlCommand(query, con)) 
+                con.Open();
+                using (var transaction = con.BeginTransaction())
                 {
-                    cmd.Parameters.AddWithValue("@Fname", txtfname);
-                    cmd.Parameters.AddWithValue("@Lname", txtlname);
-                    cmd.Parameters.AddWithValue("@email", txtemail);
-                    cmd.Parameters.AddWithValue("@pass", txtpassword);
-                    cmd.Parameters.AddWithValue("@role", role);
-                    cmd.Parameters.AddWithValue("@remberMe", rememberme);
-
-                    try { 
-                    con.Open();
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
+                    try
                     {
-                            if (role == "student") {
+                        using (var cmd = new NpgsqlCommand(userQuery, con, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@Fname", txtfname);
+                            cmd.Parameters.AddWithValue("@Lname", txtlname);
+                            cmd.Parameters.AddWithValue("@email", txtemail);
+                            cmd.Parameters.AddWithValue("@pass", txtpassword);
+                            cmd.Parameters.AddWithValue("@role", role);
+                            cmd.Parameters.AddWithValue("@remberMe", rememberme);
+
+                            
+
+                            Guid newUserId = (Guid)cmd.ExecuteScalar();
+
+                       
+                            transaction.Commit();
+
+                           
+                            Session["UserID"] = newUserId.ToString();
+
+                           
+                            if (role == "student")
+                            {
                                 Response.Redirect("/studentContent/studentlogin.aspx");
-                            } else if (role == "tutor")
+                            }
+                            else if (role == "tutor")
                             {
                                 Response.Redirect("/tutorContent/tutorlogin.aspx");
                             }
-                            
-                       
-                        
-                    } else
-                    {
-                        Response.Write("Registration Unsuccessful!");
-                    }
 
-                }
+                        }
+                    }
                     catch (PostgresException ex)
                     {
-                        if( ex.SqlState == "23505") {
+                        transaction.Rollback();
+                        if (ex.SqlState == "23505") // Unique constraint violation
+                        {
                             Response.Write("Email already exists, please login using your email.");
-                        } 
-                       
+                        }
+                        else
+                        {
+                            Response.Write("Database error: " + ex.Message);
+                        }
                     }
                     catch (Exception ex)
                     {
-
-                        Response.Write(ex.Message);
+                        transaction.Rollback();
+                        Response.Write("Error: " + ex.Message);
                     }
-                } 
-                
-
-
+                }
+            }
         }
+
+
+
     }
-
-
-
-
-}
     }

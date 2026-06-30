@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
+﻿using Npgsql;
+using System;
 using System.Configuration;
-using Npgsql;
-using System.Security.Principal;
 using System.Linq.Expressions;
+using System.Security.Principal;
+using System.Web;
+using System.Web.UI.WebControls;
 
 namespace moProf_Assignment.usercontrol
 {
@@ -68,7 +63,7 @@ namespace moProf_Assignment.usercontrol
                 {
                     cmd.Parameters.AddWithValue("@email", txtemail);
                     cmd.Parameters.AddWithValue("@pass", txtpassword);
-                   
+
 
                     try
                     {
@@ -83,13 +78,13 @@ namespace moProf_Assignment.usercontrol
                                 string userLname = reader["lastname"].ToString();
                                 string userRole = reader["role"].ToString().Trim();
 
-                               
+
                                 Session["UserEmail"] = txtemail;
                                 Session["UserFirstName"] = userFname;
                                 Session["UserLastName"] = userLname;
                                 Session["UserRole"] = userRole;
 
-                                
+
                                 if (string.Equals(userRole, "student", StringComparison.OrdinalIgnoreCase))
                                 {
                                     Response.Redirect("/studentContent/studentpanel.aspx", false);
@@ -123,10 +118,10 @@ namespace moProf_Assignment.usercontrol
             Response.Redirect("~/registerpage.aspx");
         }
 
-       
 
-        
 
-        
+
+
+
     }
 }
