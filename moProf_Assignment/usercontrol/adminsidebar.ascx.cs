@@ -5,13 +5,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace moProf_Assignment
+namespace moProf_Assignment.usercontrol
 {
-    public partial class adminpanel : System.Web.UI.Page
+    public partial class adminsidebar : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
+     
     }
 }

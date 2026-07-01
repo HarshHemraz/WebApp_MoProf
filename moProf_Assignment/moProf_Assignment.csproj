@@ -177,7 +177,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="adminpanel.aspx" />
+    <Content Include="admin.aspx" />
+    <Content Include="adminContent\adminpanel.aspx" />
+    <Content Include="adminContent\editadmin.aspx" />
+    <Content Include="adminContent\managecourses.aspx" />
+    <Content Include="adminContent\managestudents.aspx" />
+    <Content Include="adminContent\managetutors.aspx" />
     <Content Include="App_Data\categoryList.xml" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -269,6 +274,7 @@
     <Content Include="tutorContent\studentresult.aspx" />
     <Content Include="tutorContent\tutorpanel.aspx" />
     <Content Include="tutorContent\tutorlogin.aspx" />
+    <Content Include="usercontrol\adminsidebar.ascx" />
     <Content Include="usercontrol\backbutton.ascx" />
     <Content Include="usercontrol\LoginForm.ascx" />
     <Content Include="usercontrol\sidebar.ascx" />
@@ -277,12 +283,47 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="adminpanel.aspx.cs">
+    <Compile Include="admin.aspx.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin.aspx.designer.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminContent\adminpanel.aspx.cs">
       <DependentUpon>adminpanel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adminpanel.aspx.designer.cs">
+    <Compile Include="adminContent\adminpanel.aspx.designer.cs">
       <DependentUpon>adminpanel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminContent\editadmin.aspx.cs">
+      <DependentUpon>editadmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminContent\editadmin.aspx.designer.cs">
+      <DependentUpon>editadmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminContent\managecourses.aspx.cs">
+      <DependentUpon>managecourses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminContent\managecourses.aspx.designer.cs">
+      <DependentUpon>managecourses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminContent\managestudents.aspx.cs">
+      <DependentUpon>managestudents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminContent\managestudents.aspx.designer.cs">
+      <DependentUpon>managestudents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminContent\managetutors.aspx.cs">
+      <DependentUpon>managetutors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminContent\managetutors.aspx.designer.cs">
+      <DependentUpon>managetutors.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -401,6 +442,13 @@
     </Compile>
     <Compile Include="tutorContent\tutorlogin.aspx.designer.cs">
       <DependentUpon>tutorlogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\adminsidebar.ascx.cs">
+      <DependentUpon>adminsidebar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\adminsidebar.ascx.designer.cs">
+      <DependentUpon>adminsidebar.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\backbutton.ascx.cs">
       <DependentUpon>backbutton.ascx</DependentUpon>

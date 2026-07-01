@@ -49,6 +49,7 @@ namespace moProf_Assignment.usercontrol
         {
             get { return passwordtxt.Text.Trim(); }
         }
+        
 
         protected void loginBtn_Click(object sender, EventArgs e)
         {
@@ -93,6 +94,11 @@ namespace moProf_Assignment.usercontrol
                                 else if (string.Equals(userRole, "tutor", StringComparison.OrdinalIgnoreCase))
                                 {
                                     Response.Redirect("/tutorContent/tutorpanel.aspx", false);
+                                    Context.ApplicationInstance.CompleteRequest();
+                                }
+                                else if (string.Equals(userRole, "admin", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    Response.Redirect("/adminContent/adminpanel.aspx", false);
                                     Context.ApplicationInstance.CompleteRequest();
                                 }
                                 else

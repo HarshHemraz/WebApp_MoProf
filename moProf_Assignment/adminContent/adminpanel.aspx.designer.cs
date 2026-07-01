@@ -13,5 +13,14 @@ namespace moProf_Assignment
 
     public partial class adminpanel
     {
+
+        /// <summary>
+        /// adminsidebar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::moProf_Assignment.usercontrol.adminsidebar adminsidebar;
     }
 }
