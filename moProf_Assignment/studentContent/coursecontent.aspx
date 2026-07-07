@@ -22,7 +22,7 @@
                                 <h3 class="card-title"><%# Eval("c_name") %></h3>
                                 <p class="card-text"><%# Eval("c_desc") %></p>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><strong>Price:</strong> $<%# Eval("c_price") %></li>
+                                    <li class="list-group-item"><strong>Price:</strong> Rs<%# Eval("c_price") %></li>
                                     <li class="list-group-item"><strong>Category:</strong> <%# GetSafeString(Eval("category")) %></li>
                                     <li class="list-group-item"><strong>Location:</strong> <%# GetSafeString(Eval("location")) %></li>
                                     <li class="list-group-item"><strong>Experience Required:</strong> <%# GetSafeString(Eval("experience")) %></li>

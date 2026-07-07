@@ -13,5 +13,10 @@ namespace moProf_Assignment
         {
 
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/studentContent/studentlogin.aspx");
+        }
     }
 }

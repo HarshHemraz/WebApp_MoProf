@@ -16,10 +16,8 @@ namespace moProf_Assignment.usercontrol
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
-
                 try
                 {
                     using (var con = new NpgsqlConnection(conString))
@@ -31,25 +29,24 @@ namespace moProf_Assignment.usercontrol
                 {
                     Response.Write("Database Connection Failed: " + ex.Message);
                 }
-
-                // Setup the toggle button display text
-
             }
         }
+
         public string WelcomeMessage
         {
             get { return welcomeHeading.InnerText; }
             set { welcomeHeading.InnerText = value; }
         }
+
         public string getEmail
         {
             get { return emailtxt.Text.Trim(); }
         }
+
         public string getPassword
         {
             get { return passwordtxt.Text.Trim(); }
         }
-        
 
         protected void loginBtn_Click(object sender, EventArgs e)
         {
@@ -65,11 +62,9 @@ namespace moProf_Assignment.usercontrol
                     cmd.Parameters.AddWithValue("@email", txtemail);
                     cmd.Parameters.AddWithValue("@pass", txtpassword);
 
-
                     try
                     {
                         con.Open();
-
 
                         using (var reader = cmd.ExecuteReader())
                         {
@@ -79,31 +74,57 @@ namespace moProf_Assignment.usercontrol
                                 string userLname = reader["lastname"].ToString();
                                 string userRole = reader["role"].ToString().Trim();
 
+                                // DEBUGGING: Display the raw role value
+                                Response.Write($"<div style='background:yellow;padding:10px;margin:10px;border:1px solid black;'>");
+                                Response.Write($"<strong>DEBUG INFO:</strong><br/>");
+                                Response.Write($"Raw Role from DB: '{reader["role"].ToString()}'<br/>");
+                                Response.Write($"Trimmed Role: '{userRole}'<br/>");
+                                Response.Write($"Role Length: {userRole.Length}<br/>");
+                                Response.Write($"Role in lowercase: '{userRole.ToLowerInvariant()}'<br/>");
+                                Response.Write($"Equals 'student' (OrdinalIgnoreCase): {string.Equals(userRole, "student", StringComparison.OrdinalIgnoreCase)}<br/>");
+                                Response.Write($"Equals 'student' (after ToLower): {userRole.ToLowerInvariant() == "student"}<br/>");
+                                Response.Write($"</div>");
 
+                                // Set session variables
                                 Session["UserEmail"] = txtemail;
                                 Session["UserFirstName"] = userFname;
                                 Session["UserLastName"] = userLname;
                                 Session["UserRole"] = userRole;
 
+                                // Normalize role
+                                string normalizedRole = userRole.ToLowerInvariant().Trim();
 
-                                if (string.Equals(userRole, "student", StringComparison.OrdinalIgnoreCase))
+                                // Determine redirect URL
+                                string redirectUrl = null;
+
+                                // Try multiple comparison methods
+                                if (normalizedRole == "student" ||
+                                    string.Equals(userRole, "student", StringComparison.OrdinalIgnoreCase) ||
+                                    userRole.ToLowerInvariant().Contains("student"))
                                 {
-                                    Response.Redirect("/studentContent/studentpanel.aspx", false);
-                                    Context.ApplicationInstance.CompleteRequest();
+                                    redirectUrl = "~/studentContent/studentpanel.aspx";
+                                    Response.Write($"<div style='background:green;color:white;padding:5px;'>DEBUG: Student role matched! Redirecting to: {redirectUrl}</div>");
                                 }
-                                else if (string.Equals(userRole, "tutor", StringComparison.OrdinalIgnoreCase))
+                                else if (normalizedRole == "tutor" ||
+                                         string.Equals(userRole, "tutor", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    Response.Redirect("/tutorContent/tutorpanel.aspx", false);
-                                    Context.ApplicationInstance.CompleteRequest();
+                                    redirectUrl = "~/tutorContent/tutorpanel.aspx";
                                 }
-                                else if (string.Equals(userRole, "admin", StringComparison.OrdinalIgnoreCase))
+                                else if (normalizedRole == "admin" ||
+                                         string.Equals(userRole, "admin", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    Response.Redirect("/adminContent/adminpanel.aspx", false);
+                                    redirectUrl = "~/adminContent/adminpanel.aspx";
+                                }
+
+                                if (!string.IsNullOrEmpty(redirectUrl))
+                                {
+                                    Response.Redirect(redirectUrl, false);
                                     Context.ApplicationInstance.CompleteRequest();
+                                    return;
                                 }
                                 else
                                 {
-                                    Response.Write("<p style='color:orange; font-weight:bold;'>Login successful, but role is unassigned.</p>");
+                                    Response.Write($"<p style='color:orange; font-weight:bold;'>Login successful, but role '{userRole}' is unassigned.</p>");
                                 }
                             }
                             else
@@ -119,15 +140,11 @@ namespace moProf_Assignment.usercontrol
                 }
             }
         }
+
         protected void createAcct_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/registerpage.aspx");
         }
-
-
-
-
-
-
     }
 }
+    

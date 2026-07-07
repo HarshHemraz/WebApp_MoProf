@@ -9,7 +9,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> MoProf</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -94,8 +94,8 @@
             
           <button class="btn btn-outline-light" type="submit">Search</button>
             <br />
-            <button class="btn g-1 btn-outline-light" type="submit">⍈ Logout</button>
-                                     
+            <%--<button class="btn g-1 btn-outline-light" type="submit">⍈Logout</button>--%>
+            <asp:Button ID="btnLogout" CssClass="btn g-1 btn-outline-light" OnClick="btnLogout_Click" runat="server" Text="⍈Logout" />             
         </section>
       </div>
     </div>
