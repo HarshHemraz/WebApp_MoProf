@@ -19,7 +19,8 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <link href="Content/Site.css" rel="stylesheet" />
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8025603225182714"
+     crossorigin="anonymous"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100 animate-fade-in" style="animation: fadeIn 1s forwards;" runat="server">

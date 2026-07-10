@@ -18,7 +18,9 @@ namespace moProf_Assignment
         {
             if (!IsPostBack)
             {
+
                 LoadRecommendedCourses();
+                LoadRecommendations();
             }
         }
 
@@ -78,6 +80,61 @@ namespace moProf_Assignment
                     rptRecommendedCourses.DataBind();
                     lblNoCourses.Visible = true;
                     lblNoCourses.Text = "Unable to load courses right now.";
+                }
+            }
+        }
+
+        // Pulls the latest approved student recommendations for the homepage.
+        // Only "Approved" ones are public-facing; Pending/Rejected stay hidden
+        // until a tutor/admin reviews them.
+        private void LoadRecommendations()
+        {
+            string query = @"
+                SELECT
+                    r.r_id,
+                    r.recommendation_title,
+                    r.recommendation_type,
+                    r.description,
+                    r.createdat,
+                    u.firstname,
+                    u.lastname
+                FROM tblrecommendation r
+                JOIN tblusers u ON r.user_id = u.id
+                WHERE r.status = 'Approved'
+                ORDER BY r.createdat DESC
+                LIMIT 6;";
+
+            using (var con = new NpgsqlConnection(conString))
+            using (var cmd = new NpgsqlCommand(query, con))
+            {
+                try
+                {
+                    con.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        DataTable dt = new DataTable();
+                        dt.Load(reader);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            rptRecommendations.DataSource = dt;
+                            rptRecommendations.DataBind();
+                            lblNoRecommendations.Visible = false;
+                        }
+                        else
+                        {
+                            rptRecommendations.DataSource = null;
+                            rptRecommendations.DataBind();
+                            lblNoRecommendations.Visible = true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    rptRecommendations.DataSource = null;
+                    rptRecommendations.DataBind();
+                    lblNoRecommendations.Visible = true;
+                    lblNoRecommendations.Text = "Unable to load recommendations right now.";
                 }
             }
         }

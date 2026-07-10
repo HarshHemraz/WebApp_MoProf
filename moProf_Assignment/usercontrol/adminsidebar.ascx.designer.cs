@@ -51,13 +51,13 @@ namespace moProf_Assignment.usercontrol
         protected global::System.Web.UI.WebControls.LinkButton manageTutors;
 
         /// <summary>
-        /// manageCourses control.
+        /// editCourses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton manageCourses;
+        protected global::System.Web.UI.WebControls.LinkButton editCourses;
 
         /// <summary>
         /// accountmanagement control.

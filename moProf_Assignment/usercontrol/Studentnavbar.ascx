@@ -16,8 +16,8 @@
             ⦾ View Courses
         </asp:LinkButton>
 
-        <asp:LinkButton ID="viewRecommendations" runat="server" CssClass="links-side text-decoration-none text-white px-2" CausesValidation="false" PostBackUrl="~/tutorContent/recommendations.aspx">
-            ⦾ View Recommendations 
+        <asp:LinkButton ID="viewRecommendations" runat="server" CssClass="links-side text-decoration-none text-white px-2" CausesValidation="false" PostBackUrl="~/studentContent/addrecommendation.aspx">
+            ⦾ Add Recommendations 
         </asp:LinkButton>
         
         <asp:LinkButton ID="uploadResult" runat="server" CssClass="links-side text-decoration-none text-white px-2" CausesValidation="false" PostBackUrl="~/studentContent/uploadresult.aspx">

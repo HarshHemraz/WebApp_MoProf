@@ -180,7 +180,8 @@
     <Content Include="admin.aspx" />
     <Content Include="adminContent\adminpanel.aspx" />
     <Content Include="adminContent\editadmin.aspx" />
-    <Content Include="adminContent\managecourses.aspx" />
+    <Content Include="adminContent\editcoursesadmin.aspx" />
+    <Content Include="adminContent\managerecommendation.aspx" />
     <Content Include="adminContent\managestudents.aspx" />
     <Content Include="adminContent\managetutors.aspx" />
     <Content Include="App_Data\categoryList.xml" />
@@ -264,6 +265,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="studentContent\addrecommendation.aspx" />
     <Content Include="studentContent\bookingrequest.aspx" />
     <Content Include="studentContent\coursecontent.aspx" />
     <Content Include="studentContent\studentlogin.aspx" />
@@ -309,12 +311,19 @@
     <Compile Include="adminContent\editadmin.aspx.designer.cs">
       <DependentUpon>editadmin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="adminContent\managecourses.aspx.cs">
-      <DependentUpon>managecourses.aspx</DependentUpon>
+    <Compile Include="adminContent\editcoursesadmin.aspx.cs">
+      <DependentUpon>editcoursesadmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adminContent\managecourses.aspx.designer.cs">
-      <DependentUpon>managecourses.aspx</DependentUpon>
+    <Compile Include="adminContent\editcoursesadmin.aspx.designer.cs">
+      <DependentUpon>editcoursesadmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminContent\managerecommendation.aspx.cs">
+      <DependentUpon>managerecommendation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminContent\managerecommendation.aspx.designer.cs">
+      <DependentUpon>managerecommendation.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminContent\managestudents.aspx.cs">
       <DependentUpon>managestudents.aspx</DependentUpon>
@@ -377,6 +386,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="studentContent\addrecommendation.aspx.cs">
+      <DependentUpon>addrecommendation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="studentContent\addrecommendation.aspx.designer.cs">
+      <DependentUpon>addrecommendation.aspx</DependentUpon>
     </Compile>
     <Compile Include="studentContent\bookingrequest.aspx.cs">
       <DependentUpon>bookingrequest.aspx</DependentUpon>

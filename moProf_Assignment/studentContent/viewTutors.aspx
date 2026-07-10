@@ -9,7 +9,15 @@
     <uc1:Studentnavbar runat="server" ID="Studentnavbar" />
     <div class="container mt-4">
 
-        <h2 class="mb-4">Our Tutors</h2>
+           <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+               <h2 class="mb-0">Our Tutors</h2>
+               <div class="input-group" style="max-width: 350px;">
+                   <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search tutors by name..." />
+                   <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+               </div>
+           </div>
+        
+        
 
         <!-- Tutor Grid Loop -->
         <div class="row">
@@ -64,6 +72,8 @@
                 </ItemTemplate>
             </asp:Repeater>
         </div>
+
+        <asp:Label ID="lblNoResults" runat="server" CssClass="text-muted d-block text-center my-4" Visible="false" Text="No tutors found matching your search." />
 
         <!-- Pagination Controls -->
         <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">

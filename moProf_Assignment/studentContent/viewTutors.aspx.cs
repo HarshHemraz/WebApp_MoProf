@@ -22,18 +22,37 @@ namespace moProf_Assignment
             set { ViewState["CurrentPage"] = value; }
         }
 
+        // Keeps the active search term across Prev/Next postbacks, so paging
+        // doesn't silently drop the filter.
+        private string SearchTerm
+        {
+            get
+            {
+                return ViewState["SearchTerm"] as string ?? "";
+            }
+            set { ViewState["SearchTerm"] = value; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CurrentPage = 0;
+                SearchTerm = "";
                 BindTutorRepeater();
             }
         }
 
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            SearchTerm = txtSearch.Text.Trim();
+            CurrentPage = 0; // reset to first page whenever the search changes
+            BindTutorRepeater();
+        }
+
         private void BindTutorRepeater()
         {
-            DataTable dtTutors = FetchAvailableTutors();
+            DataTable dtTutors = FetchAvailableTutors(SearchTerm);
 
             if (dtTutors == null || dtTutors.Rows.Count == 0)
             {
@@ -44,8 +63,11 @@ namespace moProf_Assignment
                 lblTotalPages.Text = "0";
                 lnkPrev.Enabled = false;
                 lnkNext.Enabled = false;
+                lblNoResults.Visible = true;
                 return;
             }
+
+            lblNoResults.Visible = false;
 
             PagedDataSource pds = new PagedDataSource();
             pds.DataSource = dtTutors.DefaultView;
@@ -68,11 +90,13 @@ namespace moProf_Assignment
             rptTutors.DataBind();
         }
 
-        private DataTable FetchAvailableTutors()
+        private DataTable FetchAvailableTutors(string searchTerm)
         {
             DataTable dt = new DataTable();
 
-            // Query with JOIN to get firstname and lastname from tblusers
+            // Query with JOIN to get firstname and lastname from tblusers.
+            // When a search term is supplied, filter by first/last name
+            // (case-insensitive partial match).
             string query = @"
                 SELECT 
                     t.t_id, 
@@ -90,7 +114,15 @@ namespace moProf_Assignment
                 INNER JOIN 
                     tblusers u ON t.user_id = u.id
                 WHERE 
-                    t.""isAvailable"" = true
+                    t.""isAvailable"" = true";
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query += @"
+                    AND (u.firstname ILIKE @search OR u.lastname ILIKE @search OR (u.firstname || ' ' || u.lastname) ILIKE @search)";
+            }
+
+            query += @"
                 ORDER BY 
                     t.created_at DESC";
 
@@ -98,6 +130,11 @@ namespace moProf_Assignment
             {
                 using (var cmd = new NpgsqlCommand(query, con))
                 {
+                    if (!string.IsNullOrWhiteSpace(searchTerm))
+                    {
+                        cmd.Parameters.AddWithValue("@search", "%" + searchTerm + "%");
+                    }
+
                     try
                     {
                         con.Open();
@@ -126,6 +163,7 @@ namespace moProf_Assignment
             CurrentPage += 1;
             BindTutorRepeater();
         }
+
         // Helper method to get experience width - returns string with % sign
         public string GetExperienceWidth(object expValue)
         {
@@ -162,8 +200,5 @@ namespace moProf_Assignment
                 Response.Write("<script>alert('No tutor ID found!');</script>");
             }
         }
-
-        // Helper method to get experience width - returns string with % sign
-       
-        }
     }
+}

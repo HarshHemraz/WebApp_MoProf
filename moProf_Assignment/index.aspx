@@ -26,7 +26,6 @@
                 </div>
 
 
-
                <%-- Carousel--%>
 
                 <div class="carousel  col-lg-6" style="padding-top: 4rem;">
@@ -131,6 +130,36 @@
 
             </div>
 
+            <!-- Student Recommendations, pulled live from tblrecommendation (approved only) -->
+            <div class="row mt-4">
+
+                <p class="fw-bold text-primary" style="font-size: 1.25rem; font-weight: bold;">What our students recommend</p>
+
+                <asp:Repeater ID="rptRecommendations" runat="server">
+                    <ItemTemplate>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 border shadow-sm">
+                                <div class="card-body d-flex flex-column">
+                                    <span class="badge bg-info text-dark align-self-start mb-2"><%# Eval("recommendation_type") %></span>
+
+                                    <h5 class="card-title fw-bold"><%# Eval("recommendation_title") %></h5>
+
+                                    <p class="card-text small text-muted flex-grow-1"><%# Eval("description") %></p>
+
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <small class="text-muted">By <%# Eval("firstname") %> <%# Eval("lastname") %></small>
+                                        <small class="text-muted"><%# Eval("createdat", "{0:MMM dd, yyyy}") %></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+
+                <asp:Label ID="lblNoRecommendations" runat="server" CssClass="text-muted text-center" Visible="false" Text="No recommendations yet." />
+
+            </div>
+
 
             <!-- Additional demo content: list group to show scroll behavior when content is taller; footer remains bottom even with short content-->
             <div class="row mt-5">
@@ -159,3 +188,4 @@
         </div>
     </main>
 </asp:Content>
+

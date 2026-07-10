@@ -12,9 +12,9 @@
             ⦾ Manage Tutors
         </asp:LinkButton>
         
-        <asp:LinkButton ID="manageCourses" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/managecourses.aspx">
-            ⦾ Manage Courses
-        </asp:LinkButton>
+        <asp:LinkButton ID="editCourses" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/editcoursesadmin.aspx">
+    ⦾ Manage Courses
+</asp:LinkButton>
         
         <li class="px-4 pt-4 pb-2 pt-5"></li>
         
