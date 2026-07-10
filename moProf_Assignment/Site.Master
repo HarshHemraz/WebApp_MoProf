@@ -83,19 +83,26 @@
               <li><a class="dropdown-item" href="/tutorContent/tutorlogin.aspx">Tutor Login</a></li>
               
 
+
             </ul>
           </li>
         </ul>
         <!-- Responsive right-aligned search form + button, hidden on extra small if needed but stacks gracefully -->
 
         <section class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          
-            
-          <button class="btn btn-outline-light" type="submit">Search</button>
+       
             <br />
             <%--<button class="btn g-1 btn-outline-light" type="submit">⍈Logout</button>--%>
-            <asp:Button ID="btnLogout" CssClass="btn g-1 btn-outline-light" OnClick="btnLogout_Click" runat="server" Text="⍈Logout" />             
+            <!-- User Name Display - Right side of navbar -->
+<div class="ms-auto d-flex align-items-center">
+    <span class="text-white me-3">
+        <i class="bi bi-person-circle"></i>
+        <asp:Label ID="lblUserName" runat="server" CssClass="fw-bold px-4 d-flex" Text="Hello, Guest"></asp:Label>
+    </span>
+    <asp:LinkButton ID="lnkLogout" runat="server" CssClass="btn btn-outline-danger" OnClick="lnkLogout_Click" CausesValidation="false">
+        Logout
+    </asp:LinkButton>
+</div>     
         </section>
       </div>
     </div>

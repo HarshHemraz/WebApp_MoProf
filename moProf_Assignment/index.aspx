@@ -91,102 +91,45 @@
 
             </div>
 
-            <!-- Extra responsive cards row to showcase responsiveness (grid system) -->
+            <!-- Recommended courses, pulled live from tblcourses (most-booked first) -->
             <div class="row mt-4 ">
-                
-                    <p class="fw-bold text-primary" style="font-size: 1.25rem; font-weight: bold;">Top trending course</p>
 
-               <div class="col-md-4">
-    <div class="card h-100 border shadow-sm course-card" onclick="window.location.href='CourseDetails.aspx?course=math'" style="cursor: pointer; transition: transform 0.2s;">
-        <div class="card-body">
-            <!-- Course Badge/Tag -->
-            <span class="badge bg-primary mb-2">Free Demo</span>
-            
-            <!-- Course Title -->
-            <h5 class="card-title"><i class="bi bi-book"></i> Mathematics Fundamentals</h5>
-            
-            <!-- Tutor Name -->
-            <p class="text-muted small mb-2">By Mr. Jean Pierre</p>
-            
-            <!-- Star Rating -->
-            <div class="mb-2">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-half text-warning"></i>
-                <span class="text-muted small">(128 reviews)</span>
-            </div>
-            
-            <!-- Course Description -->
-            <p class="card-text small">Master algebra, geometry, and calculus basics. Perfect for Form 4-5 students.</p>
-            
-            <!-- Course Meta Info -->
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <span class="badge bg-success">Beginner</span>
-                <small class="text-muted"><i class="bi bi-clock"></i> Curepipe</small>
-            </div>
-            
-            <!-- Hover effect indicator -->
-            <div class="text-end mt-2">
-                <small class="text-primary">Click to preview →</small>
-            </div>
-        </div>
-    </div>
-</div>
+                <p class="fw-bold text-primary" style="font-size: 1.25rem; font-weight: bold;">Recommendations:</p>
 
-<div class="col-md-4">
-    <div class="card h-100 border shadow-sm course-card" onclick="window.location.href='CourseDetails.aspx?course=physics'" style="cursor: pointer; transition: transform 0.2s;">
-        <div class="card-body">
-            <span class="badge bg-primary mb-2">Free Demo</span>
-            <h5 class="card-title"><i class="bi bi-flask"></i> Physics Essentials</h5>
-            <p class="text-muted small mb-2">By Dr. Marie Claire</p>
-            <div class="mb-2">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star text-warning"></i>
-                <span class="text-muted small">(94 reviews)</span>
-            </div>
-            <p class="card-text small">Learn mechanics, electricity, and waves with practical examples.</p>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <span class="badge bg-warning text-dark">Intermediate</span>
-                <small class="text-muted"><i class="bi bi-clock"></i> Port Louis</small>
-            </div>
-            <div class="text-end mt-2">
-                <small class="text-primary">Click to preview →</small>
-            </div>
-        </div>
-    </div>
-</div>
+                <asp:Repeater ID="rptRecommendedCourses" runat="server">
+                    <ItemTemplate>
+                        <div class="col-md-4">
+                            <div class="card h-100 border shadow-sm course-card"
+                                onclick='<%# "window.location.href=\"CourseDetails.aspx?id=" + Eval("c_id") + "\"" %>'
+                                style="cursor: pointer; transition: transform 0.2s;">
+                                <img src='<%# string.IsNullOrEmpty(Eval("image").ToString()) ? "images/prof1.jpg" : "/CourseImages/" + Eval("image") %>'
+                                    class="card-img-top" style="height: 180px; object-fit: cover;" alt="Course Image" />
+                                <div class="card-body">
+                                    <span class="badge bg-primary mb-2"><%# Eval("category") %></span>
 
-<div class="col-md-4">
-    <div class="card h-100 border shadow-sm course-card" onclick="window.location.href='CourseDetails.aspx?course=english'" style="cursor: pointer; transition: transform 0.2s;">
-        <div class="card-body">
-            <span class="badge bg-primary mb-2">Free Demo</span>
-            <h5 class="card-title"><i class="bi bi-chat-dots"></i> English Writing</h5>
-            <p class="text-muted small mb-2">By Ms. Sophie Leblanc</p>
-            <div class="mb-2">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <span class="text-muted small">(215 reviews)</span>
-            </div>
-            <p class="card-text small">Improve essay writing, grammar, many tutorials, and literature analysis skills</p>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <span class="badge bg-success">Beginner</span>
-                <small class="text-muted"><i class="bi bi-clock"></i> St Pierre</small>
-            </div>
-            <div class="text-end mt-2">
-                <small class="text-primary">Click to preview →</small>
-            </div>
-        </div>
-    </div>
-</div>
+                                    <h5 class="card-title"><i class="bi bi-book"></i> <%# Eval("c_name") %></h5>
 
+                                    <p class="text-muted small mb-2">By <%# Eval("firstname") %> <%# Eval("lastname") %></p>
+
+                                    <p class="card-text small"><%# Eval("c_desc") %></p>
+
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <span class="badge bg-success">Rs<%# string.Format("{0:N2}", Eval("c_price")) %></span>
+                                        <small class="text-muted"><i class="bi bi-geo-alt"></i> <%# Eval("location") %></small>
+                                    </div>
+
+                                    <div class="text-end mt-2">
+                                        <small class="text-primary">Click to preview &rarr;</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+
+                <asp:Label ID="lblNoCourses" runat="server" CssClass="text-muted text-center" Visible="false" Text="No courses available yet." />
+
+            </div>
 
 
             <!-- Additional demo content: list group to show scroll behavior when content is taller; footer remains bottom even with short content-->

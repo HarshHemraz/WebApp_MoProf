@@ -31,14 +31,29 @@ namespace moProf_Assignment.tutorContent
                     Response.Write("<p style='color:red;'>Connection Error: " + ex.Message + "</p>");
                 }
 
-                // Check for ID parameter to auto-load modal data
+                // Check for ID parameter to auto-load a modal
                 if (Request.QueryString["id"] != null)
                 {
                     if (int.TryParse(Request.QueryString["id"], out int id))
                     {
-                        LoadCourse(id);
-                        string script = $"document.addEventListener('DOMContentLoaded', function() {{ var myModal = new bootstrap.Modal(document.getElementById('editCourseModal_{id}')); myModal.show(); }});";
-                        ClientScript.RegisterStartupScript(this.GetType(), "ShowEditModal", script, true);
+                        string action = Request.QueryString["action"];
+
+                        if (action == "view")
+                        {
+                            // "View Student Enrolled" link -> open the students modal for this course.
+                            // The enrolled-students data was already bound for every course card
+                            // inside rptCourses_ItemDataBound (called during BindCourseGrid above),
+                            // so we just need to pop the right modal open.
+                            string script = $"document.addEventListener('DOMContentLoaded', function() {{ var myModal = new bootstrap.Modal(document.getElementById('studentsModal_{id}')); myModal.show(); }});";
+                            ClientScript.RegisterStartupScript(this.GetType(), "ShowStudentsModal", script, true);
+                        }
+                        else
+                        {
+                            // "Edit Course" link -> load the course fields and open the edit modal.
+                            LoadCourse(id);
+                            string script = $"document.addEventListener('DOMContentLoaded', function() {{ var myModal = new bootstrap.Modal(document.getElementById('editCourseModal_{id}')); myModal.show(); }});";
+                            ClientScript.RegisterStartupScript(this.GetType(), "ShowEditModal", script, true);
+                        }
                     }
                 }
             }
@@ -72,6 +87,72 @@ namespace moProf_Assignment.tutorContent
                     }
                 }
             }
+        }
+
+        // Fires once per course card as rptCourses binds. Loads and binds the
+        // list of enrolled students into that card's nested rptEnrolledStudents.
+        protected void rptCourses_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
+                return;
+
+            DataRowView drv = e.Item.DataItem as DataRowView;
+            if (drv == null) return;
+
+            int cId = Convert.ToInt32(drv["c_id"]);
+
+            Repeater rptEnrolledStudents = (Repeater)e.Item.FindControl("rptEnrolledStudents");
+            Label lblNoStudents = (Label)e.Item.FindControl("lblNoStudents");
+
+            DataTable dtStudents = GetEnrolledStudents(cId);
+
+            if (dtStudents.Rows.Count > 0)
+            {
+                rptEnrolledStudents.DataSource = dtStudents;
+                rptEnrolledStudents.DataBind();
+                if (lblNoStudents != null) lblNoStudents.Visible = false;
+            }
+            else
+            {
+                rptEnrolledStudents.DataSource = null;
+                rptEnrolledStudents.DataBind();
+                if (lblNoStudents != null) lblNoStudents.Visible = true;
+            }
+        }
+
+        // Returns the students enrolled (accepted booking) for a given course
+        private DataTable GetEnrolledStudents(int courseId)
+        {
+            DataTable dt = new DataTable();
+
+            string query = @"
+                SELECT u.firstname, u.lastname, u.email, br.booking_date
+                FROM tblbookingrequest br
+                JOIN tblstudent s ON br.s_id = s.s_id
+                JOIN tblusers u ON s.user_id = u.id
+                WHERE br.c_id = @cid AND br.isaccepted = true
+                ORDER BY br.booking_date DESC;";
+
+            using (var con = new NpgsqlConnection(conString))
+            using (var cmd = new NpgsqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@cid", courseId);
+
+                try
+                {
+                    con.Open();
+                    using (var adapter = new NpgsqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<p style='color:red;'>Error loading enrolled students: " + ex.Message + "</p>");
+                }
+            }
+
+            return dt;
         }
 
         // Load course data for editing

@@ -7,47 +7,56 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace moProf_Assignment
+namespace moProf_Assignment.usercontrol
 {
 
 
-    public partial class SiteMaster
+    public partial class studentnavbar
     {
 
         /// <summary>
-        /// lblUserName control.
+        /// viewTutors control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserName;
+        protected global::System.Web.UI.WebControls.LinkButton viewTutors;
 
         /// <summary>
-        /// lnkLogout control.
+        /// viewAnnouncement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkLogout;
+        protected global::System.Web.UI.WebControls.LinkButton viewAnnouncement;
 
         /// <summary>
-        /// MainContent1 control.
+        /// viewCourses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent1;
+        protected global::System.Web.UI.WebControls.LinkButton viewCourses;
 
         /// <summary>
-        /// MainContent2 control.
+        /// viewRecommendations control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent2;
+        protected global::System.Web.UI.WebControls.LinkButton viewRecommendations;
+
+        /// <summary>
+        /// uploadResult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton uploadResult;
     }
 }

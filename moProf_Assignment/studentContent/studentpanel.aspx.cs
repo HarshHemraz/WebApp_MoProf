@@ -8,7 +8,6 @@ namespace moProf_Assignment
 {
     public partial class studentpanel : System.Web.UI.Page
     {
-        // Reference connection string from web.config exactly like editcourses page
         string conString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         private int CurrentPage
@@ -22,6 +21,16 @@ namespace moProf_Assignment
             set { ViewState["CurrentPage"] = value; }
         }
 
+        // NEW: stores the active search term across postbacks
+        private string SearchTerm
+        {
+            get
+            {
+                return ViewState["SearchTerm"] == null ? "" : ViewState["SearchTerm"].ToString();
+            }
+            set { ViewState["SearchTerm"] = value; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -33,19 +42,17 @@ namespace moProf_Assignment
 
         private void BindCourseRepeater()
         {
-            DataTable dtCourses = FetchAvailableCourses();
+            DataTable dtCourses = FetchAvailableCourses(SearchTerm);
 
             PagedDataSource pds = new PagedDataSource();
             pds.DataSource = dtCourses.DefaultView;
             pds.AllowPaging = true;
-            pds.PageSize = 6; // Set total course items visible per page
+            pds.PageSize = 6;
             pds.CurrentPageIndex = CurrentPage;
 
-            // Handle display logic for pagination metrics
             lblCurrentPage.Text = (CurrentPage + 1).ToString();
             lblTotalPages.Text = pds.PageCount == 0 ? "1" : pds.PageCount.ToString();
 
-            // Disable pagination buttons when out of bounds
             lnkPrev.Enabled = !pds.IsFirstPage;
             lnkNext.Enabled = !pds.IsLastPage;
 
@@ -56,20 +63,31 @@ namespace moProf_Assignment
             rptCourses.DataBind();
         }
 
-        private DataTable FetchAvailableCourses()
+        // MODIFIED: added optional searchTerm parameter, defaults to no filter if empty
+        private DataTable FetchAvailableCourses(string searchTerm = "")
         {
             DataTable dt = new DataTable();
 
-            // PostgreSQL query verifying specific schema layout
             string query = @"SELECT c_id, c_name, c_desc, c_price, no_student, category, image, location, timestable, experience 
                              FROM tblcourses 
-                             WHERE isavailable = TRUE 
-                             ORDER BY created_at DESC;";
+                             WHERE isavailable = TRUE ";
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query += @" AND (c_name ILIKE @search OR c_desc ILIKE @search OR category ILIKE @search OR location ILIKE @search) ";
+            }
+
+            query += " ORDER BY created_at DESC;";
 
             using (var con = new NpgsqlConnection(conString))
             {
                 using (var cmd = new NpgsqlCommand(query, con))
                 {
+                    if (!string.IsNullOrWhiteSpace(searchTerm))
+                    {
+                        cmd.Parameters.AddWithValue("@search", "%" + searchTerm.Trim() + "%");
+                    }
+
                     try
                     {
                         con.Open();
@@ -99,23 +117,25 @@ namespace moProf_Assignment
             BindCourseRepeater();
         }
 
+        // NEW: handles the Search button click
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            SearchTerm = txtSearch.Text.Trim();
+            CurrentPage = 0; // reset to page 1 whenever a new search runs
+            BindCourseRepeater();
+        }
+
         protected void lnkViewDetails_Click(object sender, EventArgs e)
         {
-            // Get the button that was clicked
             LinkButton btn = (LinkButton)sender;
-
-            // Get the course ID from the button's CommandArgument
             string courseId = btn.CommandArgument;
 
-            // Check if we have a valid ID
             if (!string.IsNullOrEmpty(courseId))
             {
-                // Redirect with the course ID
                 Response.Redirect("~/studentContent/coursecontent.aspx?id=" + courseId);
             }
             else
             {
-                // If no ID, show error
                 Response.Write("<script>alert('No course ID found!');</script>");
             }
         }

@@ -10,190 +10,143 @@ namespace moProf_Assignment.tutorContent
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Check if user is logged in
-            if (Session["UserID"] == null)
-            {
-                Response.Redirect("~/tutorContent/tutorlogin.aspx");
-                return;
-            }
-
             if (!IsPostBack)
             {
-                LoadUserData();
+                LoadTutor();
             }
         }
 
-        private void LoadUserData()
+        private void LoadTutor()
         {
-            try
+            string email = Request.QueryString["email"];
+
+            if (string.IsNullOrEmpty(email))
             {
-                // Get UserID from session as GUID
-                Guid userId = (Guid)Session["UserID"];
+                lblMessage.Text = "Tutor not found.";
+                return;
+            }
 
-                using (NpgsqlConnection con = new NpgsqlConnection(conString))
-                {
-                    con.Open();
+            using (NpgsqlConnection con = new NpgsqlConnection(conString))
+            {
+                con.Open();
 
-                    string query = @"
-                    SELECT
-                        u.firstname,
-                        u.lastname,
-                        u.email,
-                        u.password,
-                        t.t_exp
+                string query = @"
+                    SELECT u.firstname,
+                           u.lastname,
+                           u.email,
+                           t.""isAvailable"",
+                           t.t_exp
                     FROM tblusers u
-                    LEFT JOIN tbltutor t
-                        ON u.id = t.user_id
-                    WHERE u.id = @id";
+                    JOIN tbltutor t
+                    ON u.id = t.user_id
+                    WHERE u.email = @email
+                    AND u.role = 'tutor'";
 
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, con))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    using (NpgsqlDataReader dr = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@id", userId);
-
-                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                        if (dr.Read())
                         {
-                            if (reader.Read())
-                            {
-                                txtFirstName.Text = reader["firstname"].ToString();
-                                txtLastName.Text = reader["lastname"].ToString();
-                                txtEmail.Text = reader["email"].ToString();
-
-                                if (reader["t_exp"] != DBNull.Value)
-                                    txtExperience.Text = reader["t_exp"].ToString();
-                            }
-                            else
-                            {
-                                lblMessage.ForeColor = System.Drawing.Color.Red;
-                                lblMessage.Text = "User not found.";
-                            }
+                            txtFirstName.Text = dr["firstname"].ToString();
+                            txtLastName.Text = dr["lastname"].ToString();
+                            txtEmail.Text = dr["email"].ToString();
+                            chkIsAvailable.Checked = Convert.ToBoolean(dr["isAvailable"]);
+                            txtExperience.Text = dr["t_exp"].ToString();
+                        }
+                        else
+                        {
+                            lblMessage.Text = "Tutor not found.";
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = "Error loading data: " + ex.Message;
             }
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            try
+            if (txtNewPassword.Text != txtConfirmPassword.Text)
             {
-                // Get UserID from session as GUID
-                Guid userId = (Guid)Session["UserID"];
+                lblMessage.Text = "New passwords do not match.";
+                return;
+            }
 
-                using (NpgsqlConnection con = new NpgsqlConnection(conString))
+            using (NpgsqlConnection con = new NpgsqlConnection(conString))
+            {
+                con.Open();
+
+                string checkQuery = @"
+                    SELECT id
+                    FROM tblusers
+                    WHERE email = @email
+                    AND password = @password
+                    AND role = 'tutor'";
+
+                using (NpgsqlCommand checkCmd = new NpgsqlCommand(checkQuery, con))
                 {
-                    con.Open();
+                    checkCmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
+                    checkCmd.Parameters.AddWithValue("@password", txtCurrentPassword.Text.Trim());
 
-                    NpgsqlTransaction transaction = con.BeginTransaction();
+                    object result = checkCmd.ExecuteScalar();
 
-                    try
+                    if (result == null)
                     {
-                        // Update user table
-                        string updateUser = @"
+                        lblMessage.Text = "Current password is incorrect.";
+                        return;
+                    }
+
+                    string updateUserQuery = @"
                         UPDATE tblusers
-                        SET
-                            firstname = @fname,
-                            lastname = @lname,
-                            email = @email
+                        SET firstname = @firstname,
+                            lastname = @lastname,
+                            email = @newemail,
+                            password = @newpassword
                         WHERE id = @id";
 
-                        using (NpgsqlCommand cmd = new NpgsqlCommand(updateUser, con))
-                        {
-                            cmd.Transaction = transaction;
-
-                            cmd.Parameters.AddWithValue("@fname", txtFirstName.Text.Trim());
-                            cmd.Parameters.AddWithValue("@lname", txtLastName.Text.Trim());
-                            cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
-                            cmd.Parameters.AddWithValue("@id", userId);
-
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        // Update tutor table
-                        string updateTutor = @"
-                        UPDATE tbltutor
-                        SET t_exp = @exp
-                        WHERE user_id = @id";
-
-                        using (NpgsqlCommand cmd = new NpgsqlCommand(updateTutor, con))
-                        {
-                            cmd.Transaction = transaction;
-
-                            int exp = 0;
-                            int.TryParse(txtExperience.Text, out exp);
-
-                            cmd.Parameters.AddWithValue("@exp", exp);
-                            cmd.Parameters.AddWithValue("@id", userId);
-
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        // Change password only if entered
-                        if (!string.IsNullOrWhiteSpace(txtNewPassword.Text))
-                        {
-                            if (txtNewPassword.Text != txtConfirmPassword.Text)
-                            {
-                                lblMessage.ForeColor = System.Drawing.Color.Red;
-                                lblMessage.Text = "New passwords do not match.";
-                                transaction.Rollback();
-                                return;
-                            }
-
-                            string currentPassword = "";
-
-                            using (NpgsqlCommand cmd = new NpgsqlCommand(
-                                "SELECT password FROM tblusers WHERE id = @id", con))
-                            {
-                                cmd.Transaction = transaction;
-                                cmd.Parameters.AddWithValue("@id", userId);
-
-                                currentPassword = cmd.ExecuteScalar().ToString();
-                            }
-
-                            if (currentPassword != txtCurrentPassword.Text)
-                            {
-                                lblMessage.ForeColor = System.Drawing.Color.Red;
-                                lblMessage.Text = "Current password is incorrect.";
-                                transaction.Rollback();
-                                return;
-                            }
-
-                            using (NpgsqlCommand cmd = new NpgsqlCommand(
-                                "UPDATE tblusers SET password = @pass WHERE id = @id", con))
-                            {
-                                cmd.Transaction = transaction;
-
-                                cmd.Parameters.AddWithValue("@pass", txtNewPassword.Text);
-                                cmd.Parameters.AddWithValue("@id", userId);
-
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-
-                        transaction.Commit();
-
-                        lblMessage.ForeColor = System.Drawing.Color.Green;
-                        lblMessage.Text = "Account updated successfully.";
-
-                        // Reload the data to show updated values
-                        LoadUserData();
-                    }
-                    catch (Exception ex)
+                    using (NpgsqlCommand updateCmd = new NpgsqlCommand(updateUserQuery, con))
                     {
-                        transaction.Rollback();
-                        lblMessage.ForeColor = System.Drawing.Color.Red;
-                        lblMessage.Text = "Error: " + ex.Message;
+                        updateCmd.Parameters.AddWithValue("@firstname", txtFirstName.Text.Trim());
+                        updateCmd.Parameters.AddWithValue("@lastname", txtLastName.Text.Trim());
+                        updateCmd.Parameters.AddWithValue("@newemail", txtEmail.Text.Trim());
+                        updateCmd.Parameters.AddWithValue("@newpassword", txtNewPassword.Text.Trim());
+                        updateCmd.Parameters.AddWithValue("@id", result);
+
+                        int rows = updateCmd.ExecuteNonQuery();
+
+                        if (rows > 0)
+                        {
+                            int experience;
+                            if (!int.TryParse(txtExperience.Text.Trim(), out experience))
+                            {
+                                experience = 0;
+                            }
+
+                            string updateTutorQuery = @"
+                                UPDATE tbltutor
+                                SET ""isAvailable"" = @available,
+                                t_exp = @experience
+                                WHERE user_id = @userid;";
+
+                            using (NpgsqlCommand tutorCmd = new NpgsqlCommand(updateTutorQuery, con))
+                            {
+                                tutorCmd.Parameters.AddWithValue("@available", chkIsAvailable.Checked);
+                                tutorCmd.Parameters.AddWithValue("@experience", experience);
+                                tutorCmd.Parameters.AddWithValue("@userid", result);
+
+                                tutorCmd.ExecuteNonQuery();
+                            }
+
+                            lblMessage.ForeColor = System.Drawing.Color.Green;
+                            lblMessage.Text = "Account updated successfully.";
+                        }
+                        else
+                        {
+                            lblMessage.Text = "Update failed.";
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = "Error: " + ex.Message;
             }
         }
     }

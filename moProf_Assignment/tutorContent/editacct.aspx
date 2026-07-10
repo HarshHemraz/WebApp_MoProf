@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Edit Account" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editacct.aspx.cs" Inherits="moProf_Assignment.tutorContent.editacct" %>
+
 <%@ Register Src="~/usercontrol/sidebar.ascx" TagPrefix="uc1" TagName="sidebar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent1" runat="server">
@@ -15,6 +16,11 @@
                 <div class="mb-3">
                     <label>First Name</label>
                     <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="mb-3 d-flex gap-2">
+                    <label>Available</label>
+                    <asp:CheckBox ID="chkIsAvailable" runat="server" CssClass="h-100 w-100" />
+                     
                 </div>
 
                 <div class="mb-3">

@@ -10,6 +10,16 @@ namespace moProf_Assignment.usercontrol
 {
     public partial class sidebar : System.Web.UI.UserControl
     {
+        public string AnnouncementText
+        {
+            get { return studentresult.Text; }
+            set { studentresult.Text = value; }
+        }
+        public string AnnouncementPostBackUrl
+        {
+            get { return studentresult.PostBackUrl; }
+            set { studentresult.PostBackUrl = value; }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             

@@ -4,8 +4,8 @@
         <ul class="nav flex-column">
             <asp:Image ID="logoImg" runat="server" CssClass="imagelogo img-fluid w-50 rounded-circle d-block p-lg-4 pt-5" ImageUrl="/images/prof1.jpg" AlternateText="Company Logo" />
             <asp:Label ID="dashboardlbl" class="form-check-label" CssClass="text-side" ForeColor="White" Font-Size="Large" runat="server" Text="Dashboard"></asp:Label>
-            <asp:LinkButton ID="analytics" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/tutorContent/courses.aspx">
-⦾ Analytics
+            <asp:LinkButton ID="analytics" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/tutorContent/tutorpanel.aspx">
+⦾ View Booking Requests
             </asp:LinkButton>
             <asp:LinkButton ID="courses" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/tutorContent/addcourses.aspx">
           ⦾ Add Courses
@@ -13,8 +13,8 @@
             <asp:LinkButton ID="editcourse" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/tutorContent/editcourses.aspx">
    ⦾ Edit Courses
             </asp:LinkButton>
-            <asp:LinkButton ID="studentresult" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/tutorContent/studentresult.aspx">
-   ⦾ Student Result
+            <asp:LinkButton ID="studentresult" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/tutorContent/postannouncement.aspx">
+   ⦾ Post Announcement
             </asp:LinkButton>
 
             <li class="px-4 pt-4 pb-2 pt-5"></li>

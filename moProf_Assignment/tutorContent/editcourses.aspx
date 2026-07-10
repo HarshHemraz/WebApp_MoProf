@@ -13,7 +13,7 @@
                 <h2 class="mb-4 text-primary fw-bold">Courses Section</h2>
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <asp:Repeater ID="rptCourses" runat="server">
+                    <asp:Repeater ID="rptCourses" runat="server" OnItemDataBound="rptCourses_ItemDataBound">
                         <ItemTemplate>
                             <div class="col">
                                 <div class="card h-100 shadow-sm hover-shadow transition-all">
@@ -34,9 +34,11 @@
                                         </div>
 
                                         <!-- Redirect Link to drive Page_Load processing context -->
-                                        <a href='editcourses.aspx?id=<%# Eval("c_id") %>' class="btn btn-outline-primary btn-sm w-100 mt-auto">Edit Course</a>
+                                        <a href='editcourses.aspx?id=<%# Eval("c_id") %>&action=view' class="btn btn-outline-secondary btn-sm w-100 mt-auto my-2">View Student Enrolled</a>
 
-                                        <!-- Unique Modal Layout Per Card Block -->
+                                        <a href='editcourses.aspx?id=<%# Eval("c_id") %>&action=edit' class="btn btn-outline-primary btn-sm w-100 mt-auto">Edit Course</a>
+
+                                        <!-- Unique Modal Layout Per Card Block: Edit Course -->
                                         <div class="modal fade" id='editCourseModal_<%# Eval("c_id") %>' tabindex="-1" aria-labelledby="editCourseModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -88,6 +90,47 @@
                                                             CommandArgument='<%# Eval("c_id") %>'
                                                             OnClientClick="return confirm('Do you want to delete this data?');" />
 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Unique Modal Layout Per Card Block: Enrolled Students -->
+                                        <div class="modal fade" id='studentsModal_<%# Eval("c_id") %>' tabindex="-1" aria-labelledby="studentsModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="studentsModalLabel">Enrolled Students - <%# Eval("c_name") %></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <asp:Repeater ID="rptEnrolledStudents" runat="server">
+                                                            <HeaderTemplate>
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Name</th>
+                                                                                <th>Email</th>
+                                                                                <th>Booking Date</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                            </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <tr>
+                                                                    <td><%# Eval("firstname") %> <%# Eval("lastname") %></td>
+                                                                    <td><%# Eval("email") %></td>
+                                                                    <td><%# Eval("booking_date", "{0:MMM dd, yyyy}") %></td>
+                                                                </tr>
+                                                            </ItemTemplate>
+                                                            <FooterTemplate>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </FooterTemplate>
+                                                        </asp:Repeater>
+                                                        <asp:Label ID="lblNoStudents" runat="server" Text="No students enrolled yet." CssClass="text-muted" Visible="false" />
                                                     </div>
                                                 </div>
                                             </div>

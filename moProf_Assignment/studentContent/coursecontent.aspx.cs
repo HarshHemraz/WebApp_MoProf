@@ -30,7 +30,7 @@ namespace moProf_Assignment.studentContent
                 }
                 else
                 {
-                    lblMessage.Text = "No course specified. Please select a course.";
+                    lblMessage.Text = "Please login to view courses";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                 }
             }
@@ -206,5 +206,81 @@ namespace moProf_Assignment.studentContent
         {
             return value?.ToString() ?? "Not specified";
         }
+
+
+        protected void btnBooking_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string bookingDate = txtBookingDate.Text;
+                string message = txtMessage.Text;
+
+                // === ADD THIS: check user is logged in ===
+                if (Session["UserID"] == null)
+                {
+                    lblMessage.Text = "Please log in to book a course.";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                // === REPLACE THIS LINE ===
+                // OLD: int studentId = Convert.ToInt32(Session["s_id"]);
+                // with:
+                Guid userId = (Guid)Session["UserID"];
+
+                int courseId = Convert.ToInt32(Request.QueryString["id"]);
+
+                using (NpgsqlConnection conn = new NpgsqlConnection(conString))
+                {
+                    conn.Open();
+
+                    // === ADD THIS: look up the student's s_id using the logged-in user's Guid ===
+                    int studentId;
+                    using (NpgsqlCommand cmdLookup = new NpgsqlCommand(
+                        "SELECT s_id FROM tblstudent WHERE user_id = @userId", conn))
+                    {
+                        cmdLookup.Parameters.AddWithValue("@userId", userId);
+                        var result = cmdLookup.ExecuteScalar();
+
+                        if (result == null)
+                        {
+                            lblMessage.Text = "No student profile found for this account.";
+                            lblMessage.ForeColor = System.Drawing.Color.Red;
+                            return;
+                        }
+                        studentId = Convert.ToInt32(result);
+                    }
+
+                    // === everything below this is UNCHANGED from your original code ===
+                    string sql = @"INSERT INTO tblbookingrequest
+                   (isaccepted, req_date, messages, booking_date, s_id, c_id)
+                   VALUES
+                   (@isaccepted, @req_date, @messages, @booking_date, @s_id, @c_id)";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@isaccepted", false);
+                        cmd.Parameters.AddWithValue("@req_date", DateTime.Today);
+                        cmd.Parameters.AddWithValue("@messages", message);
+                        cmd.Parameters.AddWithValue("@booking_date", DateTime.Parse(bookingDate));
+                        cmd.Parameters.AddWithValue("@s_id", studentId);
+                        cmd.Parameters.AddWithValue("@c_id", courseId);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "msg",
+                    "alert('Booking request submitted successfully!');", true);
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = ex.Message;
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
     }
+
+
 }

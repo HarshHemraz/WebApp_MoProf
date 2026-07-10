@@ -11,12 +11,50 @@ namespace moProf_Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                LoadUserInfo();
+            }
         }
 
-        protected void btnLogout_Click(object sender, EventArgs e)
+        private void LoadUserInfo()
         {
-            Response.Redirect("/studentContent/studentlogin.aspx");
+            try
+            {
+                if (Session["UserEmail"] != null)
+                {
+                    string firstName = Session["UserFirstName"]?.ToString() ?? "";
+                    string lastName = Session["UserLastName"]?.ToString() ?? "";
+
+                    string displayName = firstName;
+                    if (!string.IsNullOrEmpty(lastName))
+                    {
+                        displayName = firstName + " " + lastName;
+                    }
+
+                    if (string.IsNullOrEmpty(displayName))
+                    {
+                        displayName = Session["UserEmail"].ToString();
+                    }
+
+                    lblUserName.Text = displayName;
+                }
+                else
+                {
+                    lblUserName.Text = "Hello, Guest";
+                }
+            }
+            catch
+            {
+                lblUserName.Text = "Guest";
+            }
+        }
+
+        protected void lnkLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+            Response.Redirect("~/studentContent/studentlogin.aspx");
         }
     }
 }

@@ -1,9 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="studentpanel.aspx.cs" Inherits="moProf_Assignment.studentpanel" %>
+
+<%@ Register Src="~/usercontrol/Studentnavbar.ascx" TagPrefix="uc1" TagName="Studentnavbar" %>
+
+
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent1" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent2" runat="server">
+    <uc1:Studentnavbar runat="server" id="Studentnavbar" />
     <div class="container mt-4">
-        <h2 class="mb-4">Available Courses</h2>
+
+    <section class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Available Courses</h2>
+
+   <div class="d-flex">
+    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control me-2" placeholder="Search courses..." />
+    <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+</div>
+</section>
         
         <!-- Course Grid Loop -->
         <div class="row">
@@ -31,7 +47,7 @@
                                 </ul>
 
                                 <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                                    <span class="h5 text-success mb-0">$<%# string.Format("{0:N2}", Eval("c_price")) %></span>
+                                    <span class="h5 text-success mb-0">Rs<%# string.Format("{0:N2}", Eval("c_price")) %></span>
                                     <asp:LinkButton ID="lnkViewDetails" runat="server" CssClass="btn btn-outline-primary btn-sm" OnClick="lnkViewDetails_Click" CommandArgument='<%# Eval("c_id") %>'>View Details</asp:LinkButton>
                                 </div>
                             </div>

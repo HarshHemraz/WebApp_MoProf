@@ -5,6 +5,12 @@
     padding-right: 15px;
     
 }
+.chkboxy {
+    height: 20px !important;
+    width: 20px !important;
+    cursor: pointer !important;
+}
+
 
     /* 2. Target the content wrapper next to the sidebar */
     .main-layout-container .add-courses-section {
@@ -23,6 +29,7 @@
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 
 
 .main-layout-container .form-card {
@@ -217,16 +224,11 @@
         }
     }
     /* Set widths on the form inputs since otherwise they're 100% wide */
-    input,
-    select,
-    textarea {
-        max-width: 280px;
-    }
 
-    footer {
-        width: 100%;
-        margin: 0;
-    }
+footer {
+    width: 100%;
+    margin: 0;
+}
 
     #footer-main {
         margin-top: auto;
@@ -306,3 +308,5 @@
         right: 20px;
         z-index: 9999;
     }
+
+

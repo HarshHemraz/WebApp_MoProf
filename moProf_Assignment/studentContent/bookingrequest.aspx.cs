@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace moProf_Assignment.tutorContent
+namespace moProf_Assignment.studentContent
 {
-    public partial class studentresult : System.Web.UI.Page
+    public partial class bookingrequest : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
