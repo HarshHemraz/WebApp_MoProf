@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Configuration;
 using Npgsql;
+using OtpNet;
+
 
 namespace moProf_Assignment
 {
@@ -17,7 +19,7 @@ namespace moProf_Assignment
                     using (var con = new NpgsqlConnection(conString))
                     {
                         con.Open();
-                        //Response.Write("Database Connection success" );
+                       
                     }
                 }
                 catch (Exception ex)
@@ -35,6 +37,9 @@ namespace moProf_Assignment
             String txtpassword = passwordtxt.Text.Trim();
             String role = RegisterOption.SelectedValue;
             bool rememberme = checkbxRemeberMe.Checked;
+
+            
+            //otp generates a one-time password based on the current time and the secret key
 
             string userQuery = "INSERT INTO tblusers (firstName, lastName, email, password, role, \"rememberSession\") VALUES (@Fname, @Lname, @email, @pass, @role, @remberMe) RETURNING id;";
 

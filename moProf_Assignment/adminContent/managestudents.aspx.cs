@@ -15,19 +15,34 @@ namespace moProf_Assignment.adminContent
         {
             if (!IsPostBack)
             {
-                LoadStudents();
+                LoadStudents(null);
             }
         }
 
-        private void LoadStudents()
+        private void LoadStudents(string searchTerm)
         {
-            // Using correct column names with quotes for case-sensitive columns
-            string query = "SELECT id, firstname, lastname, email, \"dateCreated\" FROM tblusers WHERE role = 'student' ORDER BY \"dateCreated\" DESC;";
+            string query = @"SELECT id, firstname, lastname, email, ""dateCreated"" 
+                              FROM tblusers 
+                              WHERE role = 'student' ";
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query += @" AND (firstname ILIKE @search 
+                                 OR lastname ILIKE @search 
+                                 OR email ILIKE @search) ";
+            }
+
+            query += " ORDER BY \"dateCreated\" DESC;";
 
             using (var con = new NpgsqlConnection(conString))
             {
                 using (var cmd = new NpgsqlCommand(query, con))
                 {
+                    if (!string.IsNullOrWhiteSpace(searchTerm))
+                    {
+                        cmd.Parameters.AddWithValue("@search", "%" + searchTerm.Trim() + "%");
+                    }
+
                     try
                     {
                         con.Open();
@@ -47,6 +62,9 @@ namespace moProf_Assignment.adminContent
                             {
                                 studentsRepeater.Visible = false;
                                 lblNoRecords.Visible = true;
+                                lblNoRecords.Text = string.IsNullOrWhiteSpace(searchTerm)
+                                    ? "No students found."
+                                    : "No students found matching \"" + searchTerm + "\".";
                             }
                         }
                     }
@@ -56,6 +74,17 @@ namespace moProf_Assignment.adminContent
                     }
                 }
             }
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadStudents(txtSearch.Text);
+        }
+
+        protected void btnClearSearch_Click(object sender, EventArgs e)
+        {
+            txtSearch.Text = string.Empty;
+            LoadStudents(null);
         }
 
         protected void studentsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -92,7 +121,7 @@ namespace moProf_Assignment.adminContent
                         if (rowsAffected > 0)
                         {
                             ShowMessage("Student deleted successfully.", "success");
-                            LoadStudents();
+                            LoadStudents(txtSearch.Text);
                         }
                         else
                         {

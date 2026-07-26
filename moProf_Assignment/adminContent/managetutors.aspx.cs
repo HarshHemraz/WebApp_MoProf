@@ -15,19 +15,34 @@ namespace moProf_Assignment.adminContent
         {
             if (!IsPostBack)
             {
-                LoadTutors();
+                LoadTutors(null);
             }
         }
 
-        private void LoadTutors()
+        private void LoadTutors(string searchTerm)
         {
-            // Use double quotes for columns with capital letters
-            string query = "SELECT id, firstname, lastname, email, \"dateCreated\" FROM tblusers WHERE role = 'tutor' ORDER BY \"dateCreated\" DESC;";
+            string query = @"SELECT id, firstname, lastname, email, ""dateCreated"" 
+                              FROM tblusers 
+                              WHERE role = 'tutor' ";
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query += @" AND (firstname ILIKE @search 
+                                 OR lastname ILIKE @search 
+                                 OR email ILIKE @search) ";
+            }
+
+            query += " ORDER BY \"dateCreated\" DESC;";
 
             using (var con = new NpgsqlConnection(conString))
             {
                 using (var cmd = new NpgsqlCommand(query, con))
                 {
+                    if (!string.IsNullOrWhiteSpace(searchTerm))
+                    {
+                        cmd.Parameters.AddWithValue("@search", "%" + searchTerm.Trim() + "%");
+                    }
+
                     try
                     {
                         con.Open();
@@ -47,6 +62,9 @@ namespace moProf_Assignment.adminContent
                             {
                                 tutorsRepeater.Visible = false;
                                 lblNoRecords.Visible = true;
+                                lblNoRecords.Text = string.IsNullOrWhiteSpace(searchTerm)
+                                    ? "No tutors found."
+                                    : "No tutors found matching \"" + searchTerm + "\".";
                             }
                         }
                     }
@@ -56,6 +74,17 @@ namespace moProf_Assignment.adminContent
                     }
                 }
             }
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadTutors(txtSearch.Text);
+        }
+
+        protected void btnClearSearch_Click(object sender, EventArgs e)
+        {
+            txtSearch.Text = string.Empty;
+            LoadTutors(null);
         }
 
         protected void tutorsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -92,7 +121,7 @@ namespace moProf_Assignment.adminContent
                         if (rowsAffected > 0)
                         {
                             ShowMessage("Tutor deleted successfully.", "success");
-                            LoadTutors();
+                            LoadTutors(txtSearch.Text);
                         }
                         else
                         {

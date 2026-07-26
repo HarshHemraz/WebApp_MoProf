@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace moProf_Assignment.tutorContent
+namespace moProf_Assignment.adminContent
 {
 
 
-    public partial class editcoursesadmin
+    public partial class managecontent
     {
 
         /// <summary>
@@ -31,5 +31,14 @@ namespace moProf_Assignment.tutorContent
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptCourses;
+
+        /// <summary>
+        /// lblNoRecords control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoRecords;
     }
 }

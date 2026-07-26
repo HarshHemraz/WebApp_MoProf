@@ -10,7 +10,11 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent2" runat="server">
 
-    <uc1:LoginForm  runat="server" id="LoginForm" />
-   
+    <div class="my-5 w-100 ">
+    <uc1:LoginForm  runat="server" id="LoginForm"/>
+   </div>
+    
+     
 
+  
 </asp:Content>

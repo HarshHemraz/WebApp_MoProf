@@ -15,6 +15,22 @@
                     <h2 class="mb-4">Manage Tutors</h2>
                     
                     <asp:Label ID="lblMessage" runat="server" CssClass="d-block mb-3" Visible="false"></asp:Label>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" 
+                                    placeholder="Search by name or email..."></asp:TextBox>
+                                <div class="input-group-append">
+                                    <asp:Button ID="btnSearch" runat="server" Text="Search" 
+                                        CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+                                    <asp:Button ID="btnClearSearch" runat="server" Text="Clear" 
+                                        CssClass="btn btn-secondary" OnClick="btnClearSearch_Click" 
+                                        CausesValidation="false" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="table-responsive">
                         <asp:Repeater ID="tutorsRepeater" runat="server" OnItemCommand="tutorsRepeater_ItemCommand">

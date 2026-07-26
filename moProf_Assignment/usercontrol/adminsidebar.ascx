@@ -11,6 +11,9 @@
         <asp:LinkButton ID="manageTutors" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/managetutors.aspx">
             ⦾ Manage Tutors
         </asp:LinkButton>
+         <asp:LinkButton ID="manageContent" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/managecontent.aspx">
+     ⦾ Manage Content
+ </asp:LinkButton>
         
         <asp:LinkButton ID="editCourses" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/editcoursesadmin.aspx">
     ⦾ Manage Courses

@@ -1,24 +1,19 @@
 ﻿using Npgsql;
 using System;
 using System.Configuration;
-
 using System.Data;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace moProf_Assignment.tutorContent
+namespace moProf_Assignment.adminContent
 {
-    public partial class editcoursesadmin : System.Web.UI.Page
+    public partial class managecontent : System.Web.UI.Page
     {
         string conString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Session check - only logged-in admins can manage all courses.
-            // Assumes tblusers.role holds "Admin" and that your login flow
-            // stores it in Session["Role"]. Adjust the session key/value if
-            // your app names them differently.
             if (Session["UserID"] == null)
             {
                 Response.Redirect("~/index.aspx");
@@ -35,20 +30,6 @@ namespace moProf_Assignment.tutorContent
             {
                 BindCourseGrid();
 
-                // Test database connection
-                try
-                {
-                    using (var con = new NpgsqlConnection(conString))
-                    {
-                        con.Open();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Response.Write("<p style='color:red;'>Connection Error: " + ex.Message + "</p>");
-                }
-
-                // Check for ID parameter to auto-load a modal
                 if (Request.QueryString["id"] != null)
                 {
                     if (int.TryParse(Request.QueryString["id"], out int id))
@@ -57,16 +38,11 @@ namespace moProf_Assignment.tutorContent
 
                         if (action == "view")
                         {
-                            // "View Student Enrolled" link -> open the students modal for this course.
-                            // The enrolled-students data was already bound for every course card
-                            // inside rptCourses_ItemDataBound (called during BindCourseGrid above),
-                            // so we just need to pop the right modal open.
                             string script = $"document.addEventListener('DOMContentLoaded', function() {{ var myModal = new bootstrap.Modal(document.getElementById('studentsModal_{id}')); myModal.show(); }});";
                             ClientScript.RegisterStartupScript(this.GetType(), "ShowStudentsModal", script, true);
                         }
                         else
                         {
-                            // "Edit Course" link -> load the course fields and open the edit modal.
                             LoadCourse(id);
                             string script = $"document.addEventListener('DOMContentLoaded', function() {{ var myModal = new bootstrap.Modal(document.getElementById('editCourseModal_{id}')); myModal.show(); }});";
                             ClientScript.RegisterStartupScript(this.GetType(), "ShowEditModal", script, true);
@@ -76,8 +52,7 @@ namespace moProf_Assignment.tutorContent
             }
         }
 
-        // Bind ALL courses (across every tutor) to the repeater, including
-        // the owning tutor's name so admins can tell them apart.
+        // Bind ALL courses with tutor name + enrolled student count
         private void BindCourseGrid()
         {
             string query = @"
@@ -85,7 +60,9 @@ namespace moProf_Assignment.tutorContent
                     c.c_id, c.c_name, c.c_desc, c.c_price, c.category, c.image,
                     c.timestable, c.location, c.experience,
                     u.firstname AS tutor_firstname,
-                    u.lastname AS tutor_lastname
+                    u.lastname AS tutor_lastname,
+                    (SELECT COUNT(*) FROM tblbookingrequest br 
+                     WHERE br.c_id = c.c_id AND br.isaccepted = true) AS enrolled_count
                 FROM tblcourses c
                 JOIN tbltutor t ON c.tutor_id = t.t_id
                 JOIN tblusers u ON t.user_id = u.id
@@ -102,8 +79,19 @@ namespace moProf_Assignment.tutorContent
                         {
                             DataTable dt = new DataTable();
                             dt.Load(reader);
-                            rptCourses.DataSource = dt;
-                            rptCourses.DataBind();
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                rptCourses.DataSource = dt;
+                                rptCourses.DataBind();
+                                rptCourses.Visible = true;
+                                lblNoRecords.Visible = false;
+                            }
+                            else
+                            {
+                                rptCourses.Visible = false;
+                                lblNoRecords.Visible = true;
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -114,8 +102,6 @@ namespace moProf_Assignment.tutorContent
             }
         }
 
-        // Fires once per course card as rptCourses binds. Loads and binds the
-        // list of enrolled students into that card's nested rptEnrolledStudents.
         protected void rptCourses_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
@@ -145,7 +131,6 @@ namespace moProf_Assignment.tutorContent
             }
         }
 
-        // Returns the students enrolled (accepted booking) for a given course
         private DataTable GetEnrolledStudents(int courseId)
         {
             DataTable dt = new DataTable();
@@ -180,7 +165,6 @@ namespace moProf_Assignment.tutorContent
             return dt;
         }
 
-        // Load course data for editing
         private void LoadCourse(int id)
         {
             string query = @"SELECT c_name, c_desc, c_price, location, experience, timestable 
@@ -234,7 +218,6 @@ namespace moProf_Assignment.tutorContent
             }
         }
 
-        // Save course updates
         protected void btnSave_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -264,7 +247,6 @@ namespace moProf_Assignment.tutorContent
             }
         }
 
-        // Update course in database
         private void UpdateCourseInDatabase(string id, string name, string desc, string fee, string location, string exp, string time, FileUpload fileUpload)
         {
             decimal priceValue = 0;
@@ -336,7 +318,6 @@ namespace moProf_Assignment.tutorContent
             }
         }
 
-        // Delete course
         protected void dltbtn_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;

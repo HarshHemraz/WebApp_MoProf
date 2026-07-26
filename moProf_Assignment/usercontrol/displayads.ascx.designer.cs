@@ -7,29 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace moProf_Assignment.tutorContent
+namespace moProf_Assignment.usercontrol
 {
 
 
-    public partial class editcoursesadmin
+    public partial class displayads
     {
 
         /// <summary>
-        /// adminsidebar control.
+        /// adsRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::moProf_Assignment.usercontrol.adminsidebar adminsidebar;
-
-        /// <summary>
-        /// rptCourses control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCourses;
+        protected global::System.Web.UI.WebControls.Repeater adsRepeater;
     }
 }

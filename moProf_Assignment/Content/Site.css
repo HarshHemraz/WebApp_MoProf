@@ -276,7 +276,7 @@ footer {
         align-items: center; /* Aligns content vertically in the middle relative to sidebar */
         width: 100%;
         min-height: 100vh; /* Takes full height of screen to enable vertical centering */
-        background-color: #A5B3C7;
+        
     }
         /* Sidebar configuration (adjust width if your sidebar component lacks it) */
         .main-layout-container > :first-child {

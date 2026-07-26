@@ -1,14 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editcoursesadmin.aspx.cs" Inherits="moProf_Assignment.tutorContent.editcoursesadmin" %>
 
-<%@ Register Src="~/usercontrol/sidebar.ascx" TagPrefix="uc1" TagName="sidebar" %>
+<%@ Register Src="~/usercontrol/adminsidebar.ascx" TagPrefix="uc1" TagName="adminsidebar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent1" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent2" runat="server">
     <div class="main-layout-container">
+        <uc1:adminsidebar runat="server" ID="adminsidebar" />
         <section class="add-courses-section">
-            <uc1:sidebar runat="server" ID="ucSidebar" />
+
             <div class="container mt-5">
                 <h2 class="mb-4 text-primary fw-bold">Courses Section (Admin)</h2>
 

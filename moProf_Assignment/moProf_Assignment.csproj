@@ -90,6 +90,9 @@
     <Reference Include="Npgsql, Version=7.0.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.7.0.6\lib\netstandard2.0\Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="Otp.NET, Version=1.4.1.0, Culture=neutral, PublicKeyToken=38a48df817e173a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Otp.NET.1.4.1\lib\net461\Otp.NET.dll</HintPath>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
@@ -181,9 +184,11 @@
     <Content Include="adminContent\adminpanel.aspx" />
     <Content Include="adminContent\editadmin.aspx" />
     <Content Include="adminContent\editcoursesadmin.aspx" />
+    <Content Include="adminContent\managecontent.aspx" />
     <Content Include="adminContent\managerecommendation.aspx" />
     <Content Include="adminContent\managestudents.aspx" />
     <Content Include="adminContent\managetutors.aspx" />
+    <Content Include="App_Data\ads.xml" />
     <Content Include="App_Data\categoryList.xml" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -282,6 +287,7 @@
     <Content Include="tutorContent\tutorlogin.aspx" />
     <Content Include="usercontrol\adminsidebar.ascx" />
     <Content Include="usercontrol\backbutton.ascx" />
+    <Content Include="usercontrol\displayads.ascx" />
     <Content Include="usercontrol\LoginForm.ascx" />
     <Content Include="usercontrol\sidebar.ascx" />
     <Content Include="usercontrol\Studentnavbar.ascx" />
@@ -317,6 +323,13 @@
     </Compile>
     <Compile Include="adminContent\editcoursesadmin.aspx.designer.cs">
       <DependentUpon>editcoursesadmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminContent\managecontent.aspx.cs">
+      <DependentUpon>managecontent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminContent\managecontent.aspx.designer.cs">
+      <DependentUpon>managecontent.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminContent\managerecommendation.aspx.cs">
       <DependentUpon>managerecommendation.aspx</DependentUpon>
@@ -506,6 +519,13 @@
     <Compile Include="usercontrol\backbutton.ascx.designer.cs">
       <DependentUpon>backbutton.ascx</DependentUpon>
     </Compile>
+    <Compile Include="usercontrol\displayads.ascx.cs">
+      <DependentUpon>displayads.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\displayads.ascx.designer.cs">
+      <DependentUpon>displayads.ascx</DependentUpon>
+    </Compile>
     <Compile Include="usercontrol\LoginForm.ascx.cs">
       <DependentUpon>LoginForm.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -535,7 +555,9 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="images\ads\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
