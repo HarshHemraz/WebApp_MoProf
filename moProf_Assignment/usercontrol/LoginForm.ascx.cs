@@ -73,8 +73,7 @@ namespace moProf_Assignment.usercontrol
                 return;
             }
 
-            string query = "SELECT id, firstname, lastname, role, \"otpSecret\" FROM tblusers WHERE email = @email AND password = @pass;";
-
+            string query = "SELECT id, firstname, lastname, role, \"otpSecret\", \"isFrozen\" FROM tblusers WHERE email = @email AND password = @pass;";
             using (var con = new NpgsqlConnection(conString))
             using (var cmd = new NpgsqlCommand(query, con))
             {
@@ -89,6 +88,16 @@ namespace moProf_Assignment.usercontrol
                     {
                         if (reader.Read())
                         {
+                            bool isFrozen = reader["isFrozen"] is bool fr && fr;
+
+                            if (isFrozen)
+                            {
+                                reader.Close();
+                                lblMessage.Text = "This account has been frozen by an administrator. Please contact support.";
+                                lblMessage.CssClass = "errrormsg";
+                                return;
+                            }
+
                             Session["LoginAttempts"] = 0;
 
                             Guid userId = (Guid)reader["id"];

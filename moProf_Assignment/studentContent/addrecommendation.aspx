@@ -10,13 +10,13 @@
 
     <div class="main-layout-container">
         <section class="add-courses-section">
-            <div class="container mt-5" style="max-width: 800px;">
+            <div class="container " >
 
                 <h2 class="mb-4 text-primary fw-bold">Add Recommendation</h2>
 
                 <asp:Label ID="lblMessage" runat="server" CssClass="d-block mb-3" Font-Size="Medium"></asp:Label>
 
-                <!-- New Recommendation Form -->
+                
                 <div class="card shadow-sm mb-5">
                     <div class="card-body">
 
@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                <!-- Student's own past recommendations -->
+               
                 <h4 class="mb-3 fw-bold">Your Recommendations</h4>
 
                 <asp:Repeater ID="rptMyRecommendations" runat="server">

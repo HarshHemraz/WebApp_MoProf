@@ -275,7 +275,7 @@ footer {
         display: flex;
         align-items: center; /* Aligns content vertically in the middle relative to sidebar */
         width: 100%;
-        min-height: 100vh; /* Takes full height of screen to enable vertical centering */
+         /* Takes full height of screen to enable vertical centering */
         
     }
         /* Sidebar configuration (adjust width if your sidebar component lacks it) */

@@ -7,101 +7,101 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace moProf_Assignment.usercontrol
+namespace moProf_Assignment.adminContent
 {
 
 
-    public partial class adminsidebar
+    public partial class sitesettings
     {
 
         /// <summary>
-        /// logoImg control.
+        /// adminsidebar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image logoImg;
+        protected global::moProf_Assignment.usercontrol.adminsidebar adminsidebar;
 
         /// <summary>
-        /// dashboardlbl control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label dashboardlbl;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
-        /// LinkButton1 control.
+        /// chkRegistrationsEnabled control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.CheckBox chkRegistrationsEnabled;
 
         /// <summary>
-        /// manageStudents control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton manageStudents;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// manageTutors control.
+        /// chkMaintenanceMode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton manageTutors;
+        protected global::System.Web.UI.WebControls.CheckBox chkMaintenanceMode;
 
         /// <summary>
-        /// manageContent control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton manageContent;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// editCourses control.
+        /// Label4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton editCourses;
+        protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// accountmanagement control.
+        /// txtSupportEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label accountmanagement;
+        protected global::System.Web.UI.WebControls.TextBox txtSupportEmail;
 
         /// <summary>
-        /// LinkButton2 control.
+        /// revEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail;
 
         /// <summary>
-        /// LinkButton3 control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
+        protected global::System.Web.UI.WebControls.Button btnSave;
     }
 }

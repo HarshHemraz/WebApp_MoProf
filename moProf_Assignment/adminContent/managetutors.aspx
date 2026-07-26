@@ -42,6 +42,7 @@
                                             <th>Last Name</th>
                                             <th>Email</th>
                                             <th>Date Created</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -54,12 +55,22 @@
                                     <td><%# Eval("email") %></td>
                                     <td><%# Convert.ToDateTime(Eval("dateCreated")).ToString("yyyy-MM-dd") %></td>
                                     <td>
-                                        <asp:LinkButton ID="btnEdit" runat="server" CommandName="EditTutor" 
-                                            CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm btn-primary">
-                                            Edit
+                                        <%# GetStatusBadge(Eval("status").ToString()) %>
+                                    </td>
+                                    <td style="white-space:nowrap;">
+                                        <asp:LinkButton ID="btnAccept" runat="server" CommandName="AcceptTutor" 
+                                            CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm btn-success mb-1"
+                                            Visible='<%# Eval("status").ToString() != "accepted" %>'>
+                                            Accept
+                                        </asp:LinkButton>
+                                        <asp:LinkButton ID="btnDeny" runat="server" CommandName="DenyTutor" 
+                                            CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm btn-warning mb-1"
+                                            Visible='<%# Eval("status").ToString() != "denied" %>'
+                                            OnClientClick="return confirm('Are you sure you want to deny this tutor?');">
+                                            Deny
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnDelete" runat="server" CommandName="DeleteTutor" 
-                                            CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm btn-danger"
+                                            CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm btn-danger mb-1"
                                             OnClientClick="return confirm('Are you sure you want to delete this tutor?');">
                                             Delete
                                         </asp:LinkButton>

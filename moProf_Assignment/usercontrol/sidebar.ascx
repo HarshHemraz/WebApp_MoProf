@@ -22,6 +22,9 @@
             <asp:LinkButton ID="editAcct" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/tutorContent/editacct.aspx">
            ⦾ Edit Account
             </asp:LinkButton>
+             <asp:LinkButton ID="LinkButton1" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/tutorContent/addqualification.aspx">
+⦾ Add Qualification
+             </asp:LinkButton>
             
 
         </ul>

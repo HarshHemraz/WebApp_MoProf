@@ -188,6 +188,8 @@
     <Content Include="adminContent\managerecommendation.aspx" />
     <Content Include="adminContent\managestudents.aspx" />
     <Content Include="adminContent\managetutors.aspx" />
+    <Content Include="adminContent\manageusers.aspx" />
+    <Content Include="adminContent\sitesetting.aspx" />
     <Content Include="App_Data\ads.xml" />
     <Content Include="App_Data\categoryList.xml" />
     <Content Include="Contact.aspx" />
@@ -279,6 +281,7 @@
     <Content Include="studentContent\viewannouncement.aspx" />
     <Content Include="studentContent\viewTutors.aspx" />
     <Content Include="tutorContent\addcourses.aspx" />
+    <Content Include="tutorContent\addqualification.aspx" />
     <Content Include="tutorContent\courses.aspx" />
     <Content Include="tutorContent\editacct.aspx" />
     <Content Include="tutorContent\editcourses.aspx" />
@@ -351,6 +354,20 @@
     </Compile>
     <Compile Include="adminContent\managetutors.aspx.designer.cs">
       <DependentUpon>managetutors.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminContent\manageusers.aspx.cs">
+      <DependentUpon>manageusers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminContent\manageusers.aspx.designer.cs">
+      <DependentUpon>manageusers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminContent\sitesetting.aspx.cs">
+      <DependentUpon>sitesetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminContent\sitesetting.aspx.designer.cs">
+      <DependentUpon>sitesetting.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -462,6 +479,13 @@
     </Compile>
     <Compile Include="tutorContent\addcourses.aspx.designer.cs">
       <DependentUpon>addcourses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tutorContent\addqualification.aspx.cs">
+      <DependentUpon>addqualification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tutorContent\addqualification.aspx.designer.cs">
+      <DependentUpon>addqualification.aspx</DependentUpon>
     </Compile>
     <Compile Include="tutorContent\courses.aspx.cs">
       <DependentUpon>courses.aspx</DependentUpon>

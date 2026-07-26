@@ -7,101 +7,83 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace moProf_Assignment.usercontrol
+namespace moProf_Assignment.adminContent
 {
 
 
-    public partial class adminsidebar
+    public partial class manageusers
     {
 
         /// <summary>
-        /// logoImg control.
+        /// adminsidebar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image logoImg;
+        protected global::moProf_Assignment.usercontrol.adminsidebar adminsidebar;
 
         /// <summary>
-        /// dashboardlbl control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label dashboardlbl;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
-        /// LinkButton1 control.
+        /// txtSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
 
         /// <summary>
-        /// manageStudents control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton manageStudents;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
 
         /// <summary>
-        /// manageTutors control.
+        /// btnClearSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton manageTutors;
+        protected global::System.Web.UI.WebControls.Button btnClearSearch;
 
         /// <summary>
-        /// manageContent control.
+        /// ddlRoleFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton manageContent;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRoleFilter;
 
         /// <summary>
-        /// editCourses control.
+        /// usersRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton editCourses;
+        protected global::System.Web.UI.WebControls.Repeater usersRepeater;
 
         /// <summary>
-        /// accountmanagement control.
+        /// lblNoRecords control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label accountmanagement;
-
-        /// <summary>
-        /// LinkButton2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
-
-        /// <summary>
-        /// LinkButton3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
+        protected global::System.Web.UI.WebControls.Label lblNoRecords;
     }
 }

@@ -4,6 +4,9 @@
         <asp:Image ID="logoImg" runat="server" CssClass="imagelogo img-fluid w-50 rounded-circle d-block p-lg-4 pt-5" ImageUrl="/images/prof1.jpg" AlternateText="Company Logo" />
         <asp:Label ID="dashboardlbl" runat="server" CssClass="text-side" ForeColor="White" Font-Size="Large" Text="Dashboard"></asp:Label>
         
+        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/manageusers.aspx">
+    ⦾ Manage Users
+        </asp:LinkButton>
         <asp:LinkButton ID="manageStudents" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/managestudents.aspx">
             ⦾ Manage Students
         </asp:LinkButton>
@@ -23,8 +26,12 @@
         
         <asp:Label ID="accountmanagement" runat="server" CssClass="text-side" ForeColor="White" Font-Size="Large" Text="Account Management"></asp:Label>
         
-        <asp:LinkButton ID="editAcct" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/editadmin.aspx">
-            ⦾ Edit Account
-        </asp:LinkButton>
+        
+        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/adminpanel.aspx">
+    ⦾ Dashboard
+</asp:LinkButton>
+                <asp:LinkButton ID="LinkButton3" runat="server" CssClass="links-side" CausesValidation="false" PostBackUrl="~/adminContent/sitesetting.aspx">
+    ⦾ Site Settings
+                </asp:LinkButton>
     </ul>
 </aside>
