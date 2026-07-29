@@ -1,0 +1,312 @@
+﻿
+.body-content {
+    margin-top: -4rem;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+.chkboxy {
+    height: 20px !important;
+    width: 20px !important;
+    cursor: pointer !important;
+}
+
+
+    /* 2. Target the content wrapper next to the sidebar */
+    .main-layout-container .add-courses-section {
+        display: flex;
+         /* Centers the form card horizontally */
+        align-items: flex-start; /* Keeps the card aligned nicely to the top */
+        flex-grow: 1; /* Forces this block to take up all remaining right-side screen space */
+         /* Gives breathing room away from the sidebar and edges */
+        box-sizing: border-box;
+    }
+.txtField {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+
+.main-layout-container .form-card {
+        height: 100%;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(20px) brightness(1.1) saturate(120%);
+        -webkit-backdrop-filter: blur(20px) brightness(1.1) saturate(120%);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+        max-width: 100%;
+        width: 100%;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .errrormsg {
+        padding-left: 2rem;
+    }
+
+    .hovereffect:hover {
+        text-decoration: underline !important;
+    }
+
+    .form-select {
+        display: flex;
+        justify-content: center;
+    }
+
+    .radio-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 1rem;
+    }
+
+    .text-side {
+        color: white;
+    }
+
+    .radio-options {
+        font-weight: 400;
+        margin: -50px;
+    }
+
+    .radio-btn td {
+        padding: 0.6rem;
+    }
+
+
+    .form-control p {
+        padding-left: 1rem;
+    }
+
+    .form-check {
+        padding-left: 0;
+    }
+
+    .text-center {
+        margin-bottom: 0.8rem;
+    }
+
+    .login .container {
+        padding-bottom: 6rem;
+    }
+
+    .alertbox {
+        left: 0.5rem;
+    }
+
+    .passemailtxt {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+        .passemailtxt .mb-3 {
+            width: 120%;
+            max-width: 350px;
+        }
+
+        .passemailtxt .form-control {
+            width: 100% !important;
+            margin: 0 auto;
+        }
+
+    .carousel-item {
+        height: 16rem; /* Adjust this value as needed */
+        object-fit: cover; /* Ensures the image covers the entire area without distortion */
+    }
+
+    .container .info {
+        padding-bottom: 10rem;
+    }
+
+    .carousel-inner {
+        padding-bottom: 10rem;
+        position: relative;
+        width: 100%;
+    }
+
+    .carousel-item img {
+        height: 100%;
+        object-fit: cover; /* Prevents image distortion */
+    }
+
+    .rowInfo {
+        padding: 0 3.5rem;
+    }
+    /*loginPage*/
+    .login {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100%;
+    }
+
+    .login-box {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 10px 15px;
+    }
+
+    .btn-custom {
+        background: #007bff;
+        border-radius: 8px;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+        .btn-custom:hover {
+            background: #0056b3;
+        }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(2px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+
+
+
+
+    @media screen and (max-width: 768px) {
+        .loginform {
+            padding-top: 3.5rem !important;
+            margin-bottom: 10px !important;
+        }
+
+        .container .info {
+            padding-bottom: 0rem;
+        }
+
+        .login .container {
+            padding-bottom: 0rem;
+        }
+
+        .carousel-title {
+            padding-top: 0rem !important;
+        }
+
+        .rowInfo {
+            padding-bottom: 2rem;
+        }
+
+        .login {
+            min-height: 80vh;
+            padding-bottom: 100px;
+        }
+
+        .carousel {
+            padding-top: 2rem;
+        }
+
+        .body-content {
+            margin-top: 15px;
+        }
+    }
+    /* Set widths on the form inputs since otherwise they're 100% wide */
+
+footer {
+    width: 100%;
+    margin: 0;
+}
+
+    #footer-main {
+        margin-top: auto;
+    }
+
+    .para {
+        font-size: 1rem;
+    }
+    /*sidebar*/
+    #sidebar {
+        display: flex;
+        justify-content: center;
+    }
+
+    a.links-side {
+        padding-left: 2rem;
+        text-decoration: none;
+        padding-top: 1rem;
+    }
+
+    span.text-side {
+        margin: 1rem;
+        padding-left: 1rem;
+        color: red;
+    }
+
+    .imagelogo {
+        padding-left: 1rem;
+    }
+
+    a.logout-btn {
+        font-size: 2rem;
+        margin-top: auto;
+        margin-bottom: 2rem;
+    }
+
+    .add-courses {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .main-layout-container {
+        display: flex;
+        align-items: center; /* Aligns content vertically in the middle relative to sidebar */
+        width: 100%;
+         /* Takes full height of screen to enable vertical centering */
+        
+    }
+        /* Sidebar configuration (adjust width if your sidebar component lacks it) */
+        .main-layout-container > :first-child {
+            width: 250px;
+            flex-shrink: 0;
+        }
+    /* Right-side content styling */
+    .add-courses {
+        flex-grow: 1; /* Inherits remaining horizontal space */
+        display: flex;
+        justify-content: center; /* Centers form horizontally on the right side */
+        padding: 20px;
+    }
+    /* Optional card styling to keep form elements organized */
+    .form-card {
+        width: 100%;
+        max-width: 400px;
+    }
+    /* Responsive: Portrait tablets and up */
+    @media screen and (min-width: 768px) {
+        .body-content {
+            padding: 0;
+        }
+    }
+
+    .back-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+    }
+
+

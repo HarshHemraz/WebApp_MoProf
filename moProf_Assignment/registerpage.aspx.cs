@@ -3,7 +3,6 @@ using System.Configuration;
 using Npgsql;
 using OtpNet;
 
-
 namespace moProf_Assignment
 {
     public partial class registerpage : System.Web.UI.Page
@@ -19,7 +18,6 @@ namespace moProf_Assignment
                     using (var con = new NpgsqlConnection(conString))
                     {
                         con.Open();
-                       
                     }
                 }
                 catch (Exception ex)
@@ -37,9 +35,6 @@ namespace moProf_Assignment
             String txtpassword = passwordtxt.Text.Trim();
             String role = RegisterOption.SelectedValue;
             bool rememberme = checkbxRemeberMe.Checked;
-
-            
-            //otp generates a one-time password based on the current time and the secret key
 
             string userQuery = "INSERT INTO tblusers (firstName, lastName, email, password, role, \"rememberSession\") VALUES (@Fname, @Lname, @email, @pass, @role, @remberMe) RETURNING id;";
 
@@ -64,55 +59,46 @@ namespace moProf_Assignment
                             newUserId = (Guid)cmd.ExecuteScalar();
                         }
 
+                        
+
                         if (role == "student")
                         {
-                            string studentQuery = @"
-                                INSERT INTO tblstudent (user_id)
-                                VALUES (@user_id)";
-
+                            
+                            string studentQuery = "INSERT INTO tblstudent (user_id) VALUES (@user_id)";
                             using (var studentCmd = new NpgsqlCommand(studentQuery, con, transaction))
                             {
                                 studentCmd.Parameters.AddWithValue("@user_id", newUserId);
                                 studentCmd.ExecuteNonQuery();
                             }
                         }
-                        else if (role == "tutor")
-                        {
-                            string tutorQuery = @"
-                                INSERT INTO tbltutor (user_id)
-                                VALUES (@user_id)";
-
-                            using (var tutorCmd = new NpgsqlCommand(tutorQuery, con, transaction))
-                            {
-                                tutorCmd.Parameters.AddWithValue("@user_id", newUserId);
-                                tutorCmd.ExecuteNonQuery();
-                            }
-                        }
 
                         transaction.Commit();
 
-                        // Store as Guid, not string, so downstream (Guid)Session["UserID"] casts work
                         Session["UserID"] = newUserId;
 
                         if (role == "student")
-                        {
                             Response.Redirect("/studentContent/studentlogin.aspx");
-                        }
                         else if (role == "tutor")
-                        {
                             Response.Redirect("/tutorContent/tutorlogin.aspx");
-                        }
                     }
                     catch (PostgresException ex)
                     {
                         transaction.Rollback();
-                        if (ex.SqlState == "23505") // Unique constraint violation
+
+                        if (ex.SqlState == "23505")
                         {
-                            Response.Write("Email already exists, please login using your email.");
+                            if (ex.ConstraintName != null && ex.ConstraintName.ToLower().Contains("email"))
+                            {
+                                Response.Write("Email already exists, please login using your email.");
+                            }
+                            else
+                            {
+                                Response.Write("Registration failed (duplicate on: " + ex.ConstraintName + "). " + ex.MessageText);
+                            }
                         }
                         else
                         {
-                            Response.Write("Database error: " + ex.Message);
+                            Response.Write("Database error: " + ex.SqlState + " - " + ex.MessageText);
                         }
                     }
                     catch (Exception ex)
